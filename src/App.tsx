@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Toaster } from '@/components/ui/sonner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -34,6 +35,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <Toaster />
     </div>
   );
 }

@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { Mail, Phone, Github, MapPin } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { personalInfo } from '@/data/resume'
+import { ContactFormModal } from '@/components/ContactFormModal'
 
 const contactItems = [
   {
@@ -31,6 +33,8 @@ const contactItems = [
 ]
 
 export function Contact() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <section id="contact" className="py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -73,17 +77,17 @@ export function Contact() {
                 <p className="text-muted-foreground mb-4">
                   이력서나 포트폴리오에 대해 더 자세한 내용이 궁금하시다면
                 </p>
-                <Button size="lg" asChild>
-                  <a href={`mailto:${personalInfo.email}`}>
-                    <Mail className="h-4 w-4 mr-2" />
-                    이메일 보내기
-                  </a>
+                <Button size="lg" onClick={() => setIsModalOpen(true)}>
+                  <Mail className="h-4 w-4 mr-2" />
+                  이메일 보내기
                 </Button>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      <ContactFormModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </section>
   )
 }
