@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section id='experience' className='py-20 bg-muted/30'>
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
-        <div className='text-center mb-12'>
+        <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>
             Experience
           </h2>
@@ -26,6 +26,8 @@ export function Experience() {
                 className={`relative flex flex-col md:flex-row gap-8 ${
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
+                data-aos={index % 2 === 0 ? 'fade-left' : 'fade-right'}
+                data-aos-delay={index * 100}
               >
                 {/* Timeline dot */}
                 <div className='absolute left-0 md:left-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background md:-translate-x-1/2 -translate-x-1/2' />

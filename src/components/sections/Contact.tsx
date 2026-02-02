@@ -34,14 +34,14 @@ export function Contact() {
   return (
     <section id="contact" className="py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-foreground mb-4">Contact</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             새로운 기회나 협업에 대해 이야기 나누고 싶으시다면 언제든 연락 주세요.
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto" data-aos="zoom-in">
           <Card className="bg-background">
             <CardContent className="p-8">
               <div className="grid sm:grid-cols-2 gap-6">

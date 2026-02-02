@@ -7,7 +7,7 @@ export function Education() {
   return (
     <section id='education' className='py-20 bg-muted/30'>
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
-        <div className='text-center mb-12'>
+        <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>
             Education & Certifications
           </h2>
@@ -18,7 +18,7 @@ export function Education() {
 
         <div className='grid md:grid-cols-2 gap-8'>
           {/* Education */}
-          <Card className='bg-background'>
+          <Card className='bg-background' data-aos='fade-right'>
             <CardContent className='p-6'>
               <div className='flex items-center gap-3 mb-6'>
                 <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center'>
@@ -56,7 +56,7 @@ export function Education() {
           </Card>
 
           {/* Certifications */}
-          <Card className='bg-background'>
+          <Card className='bg-background' data-aos='fade-left'>
             <CardContent className='p-6'>
               <div className='flex items-center gap-3 mb-6'>
                 <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center'>

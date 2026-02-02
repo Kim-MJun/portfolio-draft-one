@@ -1,4 +1,5 @@
 import { ArrowDown, Github, Mail } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/data/resume';
@@ -21,8 +22,22 @@ export function Hero() {
           <h1 className='text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4'>
             안녕하세요,
             <br />
-            <span className='text-accent'>{personalInfo.experience}</span>{' '}
-            {personalInfo.title}
+            <TypeAnimation
+              sequence={[
+                `${personalInfo.experience} ${personalInfo.title}`,
+                2000,
+                `${personalInfo.experience} React 개발자`,
+                2000,
+                `${personalInfo.experience} TypeScript 개발자`,
+                2000,
+                `${personalInfo.experience} Next.js 개발자`,
+                2000,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className='text-accent'
+            />
             <br />
             <span className='text-foreground'>{personalInfo.name}</span>입니다.
           </h1>

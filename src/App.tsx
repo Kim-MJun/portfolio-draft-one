@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -9,6 +12,15 @@ import { Education } from '@/components/sections/Education';
 import { Contact } from '@/components/sections/Contact';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <div className='min-h-screen bg-background'>
       <Header />

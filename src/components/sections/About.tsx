@@ -27,7 +27,7 @@ export function About() {
   return (
     <section id='about' className='py-20 bg-muted/30'>
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
-        <div className='text-center mb-12'>
+        <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>About Me</h2>
           <p className='text-muted-foreground max-w-2xl mx-auto'>
             {personalInfo.keywords.join(', ')}을 갖춘 {personalInfo.experience}{' '}
@@ -36,10 +36,12 @@ export function About() {
         </div>
 
         <div className='grid md:grid-cols-3 gap-6'>
-          {strengths.map((strength) => (
+          {strengths.map((strength, index) => (
             <Card
               key={strength.title}
               className='bg-background hover:shadow-lg transition-shadow'
+              data-aos='fade-up'
+              data-aos-delay={index * 100}
             >
               <CardContent className='p-6'>
                 <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4'>
