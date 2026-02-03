@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTheme } from '@/hooks/use-theme';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -13,7 +13,6 @@ const navItems = [
 ];
 
 export function Header() {
-  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -51,24 +50,12 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <Button variant='ghost' size='icon' onClick={toggleTheme}>
-              {theme === 'dark' ? (
-                <Sun className='h-5 w-5' />
-              ) : (
-                <Moon className='h-5 w-5' />
-              )}
-            </Button>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile Menu Button */}
           <div className='flex items-center gap-2 md:hidden'>
-            <Button variant='ghost' size='icon' onClick={toggleTheme}>
-              {theme === 'dark' ? (
-                <Sun className='h-5 w-5' />
-              ) : (
-                <Moon className='h-5 w-5' />
-              )}
-            </Button>
+            <ThemeToggle />
             <Button
               variant='ghost'
               size='icon'
