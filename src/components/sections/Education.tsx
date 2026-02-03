@@ -47,9 +47,9 @@ export function Education() {
                       {education.status}
                     </Badge>
                   </div>
-                  <p className='text-sm text-muted-foreground mt-1'>
+                  {/* <p className='text-sm text-muted-foreground mt-1'>
                     학점: {education.gpa}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </CardContent>
