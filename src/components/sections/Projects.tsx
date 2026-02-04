@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   Calendar,
   ExternalLink,
@@ -37,6 +37,18 @@ interface ProjectModalProps {
 
 function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
+
+  // ESC 키로 전체화면 닫기
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isImageFullscreen) {
+        setIsImageFullscreen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isImageFullscreen]);
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
@@ -166,7 +178,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
       {/* Fullscreen Image Modal */}
       {isImageFullscreen && project.thumbnail && (
         <div
-          className='fixed inset-0 z-60 flex items-center justify-center bg-foreground'
+          className='fixed inset-0 z-60 flex items-center justify-center bg-black/90'
           onClick={() => setIsImageFullscreen(false)}
         >
           <button

@@ -20,6 +20,9 @@ export const personalInfo = {
     'Tailwind CSS',
     'TanStack Query',
     'Zustand',
+    'Git',
+    'Slack',
+    'Notion',
   ],
   introduction: `React, Next.js, TypeScript 기반의 대규모 보안 시스템 및 데이터 분석 플랫폼 구축 경험이 있습니다. 문제 해결과 성능 최적화에 강점을 가지고 있으며, 협업과 커뮤니케이션을 통해 프로젝트 완성도를 높여왔습니다.`,
 };
