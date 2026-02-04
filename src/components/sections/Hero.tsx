@@ -41,9 +41,22 @@ export function Hero() {
           </h1>
 
           {/* Description */}
-          <p className='text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed'>
+          <p className='text-lg text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed'>
             {personalInfo.introduction}
           </p>
+
+          {/* Tech Stack Tags */}
+          <div className='flex items-center justify-center flex-wrap gap-2 mb-8'>
+            {personalInfo.heroSkills.map((skill, index) => (
+              <Badge
+                key={skill}
+                className='animate-fade-in-up px-4 py-1.5 text-sm bg-accent/10 text-accent border border-accent/20 hover:-translate-y-1 hover:bg-accent/20 hover:border-accent/40 transition-all duration-200 cursor-default'
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {skill}
+              </Badge>
+            ))}
+          </div>
 
           {/* CTA Buttons */}
           <div className='flex items-center justify-center gap-4 mb-12'>

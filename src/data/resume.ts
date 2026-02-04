@@ -12,6 +12,15 @@ export const personalInfo = {
   phone: '+82 10-3383-6553',
   github: 'https://github.com/Kim-MJun',
   keywords: ['열정', '소통', '유연함'],
+  heroSkills: [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Sass',
+    'Tailwind CSS',
+    'TanStack Query',
+    'Zustand',
+  ],
   introduction: `React, Next.js, TypeScript 기반의 대규모 보안 시스템 및 데이터 분석 플랫폼 구축 경험이 있습니다. 문제 해결과 성능 최적화에 강점을 가지고 있으며, 협업과 커뮤니케이션을 통해 프로젝트 완성도를 높여왔습니다.`,
 };
 
@@ -25,7 +34,7 @@ export const skills = {
   ],
   styling: [
     { name: 'Tailwind CSS', level: 85 },
-    { name: 'SCSS/SASS', level: 90 },
+    { name: 'SASS', level: 90 },
     { name: 'Ant Design', level: 90 },
     { name: 'styled-components', level: 85 },
   ],
@@ -107,12 +116,12 @@ export const projects = [
       'React',
       'TypeScript',
       'Vite',
+      'Sass',
       'Cesium',
       'Zustand',
       'TanStack Query',
       'WebSocket',
       'HLS.js',
-      'SCSS',
     ],
     role: '프론트엔드 엔지니어 6명 / 개인 기여도 30%',
     achievements: [
