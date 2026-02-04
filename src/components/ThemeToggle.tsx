@@ -14,7 +14,7 @@ function ThemeButton({ icon, label, isActive, onClick }: ThemeButtonProps) {
     <button
       onClick={onClick}
       className={cn(
-        'flex items-center justify-center p-1.5 rounded-md transition-all',
+        'flex items-center justify-center p-1.5 rounded-md transition-all cursor-pointer',
         'hover:bg-muted',
         isActive
           ? 'bg-muted-foreground/50 text-foreground'

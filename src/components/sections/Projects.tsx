@@ -1,8 +1,18 @@
 import { useState, useMemo } from 'react';
-import { Calendar, ExternalLink, X, Users, CheckCircle2, Filter } from 'lucide-react';
+import {
+  Calendar,
+  ExternalLink,
+  X,
+  Users,
+  CheckCircle2,
+  Filter,
+  Maximize2,
+  Code2,
+} from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { projects } from '@/data/resume';
 
 interface Project {
@@ -17,6 +27,7 @@ interface Project {
   highlights: string[];
   liveUrl?: string;
   thumbnail?: string;
+  isBlur?: boolean;
 }
 
 interface ProjectModalProps {
@@ -25,6 +36,8 @@ interface ProjectModalProps {
 }
 
 function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [isImageFullscreen, setIsImageFullscreen] = useState(false);
+
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
       {/* Backdrop */}
@@ -43,12 +56,53 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Thumbnail Image in Modal */}
-        {project.thumbnail && (
-          <div className='relative w-full h-80 overflow-hidden bg-muted'>
+        <div className='relative w-full h-80 overflow-hidden bg-muted group/thumbnail'>
+          {project.thumbnail ? (
+            <>
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                className={cn(
+                  'w-full h-full object-cover',
+                  project.isBlur && 'blur-xs'
+                )}
+              />
+              {/* 전체화면 버튼 - 썸네일 호버 시에만 표시 */}
+              <button
+                onClick={() => setIsImageFullscreen(true)}
+                className='absolute top-3 right-3 p-2 bg-black/50 hover:bg-black/70 rounded-lg text-white opacity-0 group-hover/thumbnail:opacity-100 transition-opacity'
+                title='이미지 전체화면'
+              >
+                <Maximize2 className='h-5 w-5' />
+              </button>
+            </>
+          ) : (
+            <div className='w-full h-full bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center'>
+              <Code2 className='h-24 w-24 text-primary/40' />
+            </div>
+          )}
+        </div>
+
+        {/* Fullscreen Image Modal */}
+        {isImageFullscreen && project.thumbnail && (
+          <div
+            className='fixed inset-0 z-60 flex items-center justify-center bg-foreground'
+            onClick={() => setIsImageFullscreen(false)}
+          >
+            <button
+              onClick={() => setIsImageFullscreen(false)}
+              className='absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors'
+            >
+              <X className='h-6 w-6' />
+            </button>
             <img
               src={project.thumbnail}
               alt={project.title}
-              className='w-full h-full object-cover'
+              className={cn(
+                'max-w-[90vw] max-h-[90vh] object-contain',
+                project.isBlur && 'blur-xs'
+              )}
+              onClick={(e) => e.stopPropagation()}
             />
           </div>
         )}
@@ -210,7 +264,9 @@ export function Projects() {
           <div>
             <div className='flex items-center gap-2 mb-3'>
               <Filter className='h-4 w-4 text-muted-foreground' />
-              <h3 className='text-sm font-semibold text-foreground'>기술 스택</h3>
+              <h3 className='text-sm font-semibold text-foreground'>
+                기술 스택
+              </h3>
             </div>
             <div className='flex flex-wrap gap-2'>
               {techStacks.map((tech) => (
@@ -229,7 +285,11 @@ export function Projects() {
           {/* 필터 초기화 & 결과 카운트 */}
           <div className='flex items-center justify-between pt-2'>
             <p className='text-sm text-muted-foreground'>
-              총 <span className='font-semibold text-foreground'>{filteredProjects.length}</span>개의 프로젝트
+              총{' '}
+              <span className='font-semibold text-foreground'>
+                {filteredProjects.length}
+              </span>
+              개의 프로젝트
             </p>
             {(selectedCompany !== '전체' || selectedTech !== '전체') && (
               <Button
@@ -254,16 +314,23 @@ export function Projects() {
               data-aos-delay={index * 100}
             >
               {/* Thumbnail Image */}
-              {project.thumbnail && (
-                <div className='relative w-full h-52 overflow-hidden bg-muted'>
+              <div className='relative w-full h-52 overflow-hidden bg-muted'>
+                {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
                     alt={project.title}
-                    className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                    className={cn(
+                      'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
+                      project.isBlur && 'blur-xs'
+                    )}
                   />
-                  <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent' />
-                </div>
-              )}
+                ) : (
+                  <div className='w-full h-full bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center'>
+                    <Code2 className='h-16 w-16 text-primary/40 group-hover:scale-110 transition-transform duration-300' />
+                  </div>
+                )}
+                <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent' />
+              </div>
 
               <CardHeader>
                 <div className='flex items-center justify-between mb-2'>

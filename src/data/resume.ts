@@ -1,13 +1,13 @@
 // 이미지 import (Vite가 빌드 시 올바르게 처리하도록)
 import apec2025Thumbnail from '@/assets/APEC2025_thumbnail.png';
 import apchubThumbnail from '@/assets/apchub_thumbnail.png';
-import reactLogo from '@/assets/react.svg';
+import cybercrimeThumbnail from '@/assets/cybercrime_thumbnail.png';
+import incheonThumbnail from '@/assets/incheon_thumbnail.png';
 
 export const personalInfo = {
   name: '김민준',
   nameEn: 'Kim Minjun',
   title: '웹 프론트엔드 개발자',
-  experience: '5년차',
   email: 'balam14774@gmail.com',
   phone: '+82 10-3383-6553',
   github: 'https://github.com/Kim-MJun',
@@ -124,6 +124,7 @@ export const projects = [
     ],
     highlights: ['3D GIS', '실시간 스트리밍', 'AI 이벤트 감지'],
     thumbnail: apec2025Thumbnail,
+    isBlur: true,
   },
   {
     id: 2,
@@ -149,7 +150,8 @@ export const projects = [
       '폐쇄망 환경 배포 및 유지보수',
     ],
     highlights: ['성능 최적화 90%', 'ElasticSearch', '마이그레이션'],
-    thumbnail: reactLogo,
+    thumbnail: cybercrimeThumbnail,
+    isBlur: true,
   },
   {
     id: 3,
@@ -175,7 +177,8 @@ export const projects = [
       'DB 설계 및 스키마 작성',
     ],
     highlights: ['커스텀 결재라인', '풀스택 개발', '폐쇄망 배포'],
-    thumbnail: reactLogo,
+    thumbnail: incheonThumbnail,
+    isBlur: true,
   },
   {
     id: 4,
@@ -201,7 +204,6 @@ export const projects = [
       'AWS EC2 서버의 PM2를 사용한 무중단 배포',
     ],
     highlights: ['작업 시간 80% 단축', 'PDF 자동 파싱', '무중단 배포'],
-    thumbnail: reactLogo,
   },
   {
     id: 5,
@@ -222,6 +224,7 @@ export const projects = [
     highlights: ['온라인 교육 시스템', '실서비스 운영', 'B2G 사업'],
     liveUrl: 'https://apc-hub.org/',
     thumbnail: apchubThumbnail,
+    isBlur: false,
   },
 ];
 

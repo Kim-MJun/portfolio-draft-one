@@ -24,16 +24,14 @@ export function Hero() {
             <br />
             <TypeAnimation
               sequence={[
-                `${personalInfo.experience} ${personalInfo.title}`,
+                `${personalInfo.title}`,
                 2000,
-                `${personalInfo.experience} React 개발자`,
+                `React 개발자`,
                 2000,
-                `${personalInfo.experience} TypeScript 개발자`,
-                2000,
-                `${personalInfo.experience} Next.js 개발자`,
+                `Next.js 개발자`,
                 2000,
               ]}
-              wrapper="span"
+              wrapper='span'
               speed={50}
               repeat={Infinity}
               className='text-accent'
