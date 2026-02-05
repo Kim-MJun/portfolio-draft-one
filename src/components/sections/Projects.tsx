@@ -13,22 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { projects } from '@/data/resume';
-
-interface Project {
-  id: number;
-  title: string;
-  period: string;
-  company: string;
-  description: string;
-  techStack: string[];
-  role: string;
-  achievements: string[];
-  highlights: string[];
-  liveUrl?: string;
-  thumbnail?: string;
-  isBlur?: boolean;
-}
+import { mainProjects, etcProjects, type Project } from '@/data/resume';
 
 interface ProjectModalProps {
   project: Project;
@@ -209,14 +194,14 @@ export function Projects() {
 
   // 회사 목록 추출
   const companies = useMemo(() => {
-    const uniqueCompanies = Array.from(new Set(projects.map((p) => p.company)));
+    const uniqueCompanies = Array.from(new Set(mainProjects.map((p) => p.company)));
     return ['전체', ...uniqueCompanies];
   }, []);
 
   // 기술 스택 목록 추출 (빈도순 정렬)
   const techStacks = useMemo(() => {
     const techCount: Record<string, number> = {};
-    projects.forEach((project) => {
+    mainProjects.forEach((project) => {
       project.techStack.forEach((tech) => {
         techCount[tech] = (techCount[tech] || 0) + 1;
       });
@@ -229,7 +214,7 @@ export function Projects() {
 
   // 필터링된 프로젝트 목록
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
+    return mainProjects.filter((project) => {
       const matchCompany =
         selectedCompany === '전체' || project.company === selectedCompany;
       const matchTech =
@@ -399,6 +384,98 @@ export function Projects() {
               </CardContent>
             </Card>
           ))}
+        </div>
+        {/* ETC Projects */}
+        <div className='mt-20'>
+          <div className='text-center mb-12' data-aos='fade-up'>
+            <h3 className='text-2xl font-bold text-foreground mb-4'>
+              ETC Projects
+            </h3>
+            <p className='text-muted-foreground max-w-2xl mx-auto'>
+              그 외 참여한 프로젝트들입니다.
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {etcProjects.map((project, index) => (
+              <Card
+                key={project.id}
+                className='group cursor-pointer hover:shadow-lg transition-all hover:-translate-y-1 overflow-hidden'
+                onClick={() => setSelectedProject(project)}
+                data-aos='zoom-in'
+                data-aos-delay={index * 100}
+              >
+                {/* Thumbnail Image */}
+                <div className='relative w-full h-52 overflow-hidden bg-muted'>
+                  {project.thumbnail ? (
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className={cn(
+                        'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
+                        project.isBlur && 'blur-xs',
+                      )}
+                    />
+                  ) : (
+                    <div className='w-full h-full bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center'>
+                      <Code2 className='h-16 w-16 text-primary/40 group-hover:scale-110 transition-transform duration-300' />
+                    </div>
+                  )}
+                  <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent' />
+                </div>
+
+                <CardHeader>
+                  <div className='flex items-center justify-between mb-2'>
+                    <Badge variant='outline' className='text-xs'>
+                      {project.company}
+                    </Badge>
+                    {project.liveUrl && (
+                      <ExternalLink className='h-4 w-4 text-muted-foreground' />
+                    )}
+                  </div>
+                  <CardTitle className='text-lg group-hover:text-primary transition-colors'>
+                    {project.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className='text-sm text-muted-foreground mb-4 line-clamp-2'>
+                    {project.description}
+                  </p>
+
+                  <div className='flex flex-wrap gap-1 mb-4'>
+                    {project.highlights.map((highlight) => (
+                      <Badge
+                        key={highlight}
+                        variant='secondary'
+                        className='text-xs'
+                      >
+                        {highlight}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <div className='flex flex-wrap gap-1'>
+                    {project.techStack.slice(0, 4).map((tech) => (
+                      <span key={tech} className='text-xs text-muted-foreground'>
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 4 && (
+                      <span className='text-xs text-muted-foreground'>
+                        +{project.techStack.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className='mt-4 pt-4 border-t border-border'>
+                    <span className='text-xs text-muted-foreground'>
+                      {project.period}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
 
