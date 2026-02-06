@@ -50,7 +50,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
             <h2 className='text-xl font-bold text-foreground'>
               {project.title}
             </h2>
-            <Button variant='ghost' size='icon' onClick={onClose}>
+            <Button variant='ghost' size='icon' onClick={onClose} aria-label='모달 닫기'>
               <X className='h-5 w-5' />
             </Button>
           </div>
@@ -71,7 +71,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <button
                   onClick={() => setIsImageFullscreen(true)}
                   className='absolute top-3 right-3 p-2 cursor-pointer bg-black/50 hover:bg-black/70 rounded-lg text-white opacity-0 group-hover/thumbnail:opacity-100 transition-opacity'
-                  title='이미지 전체화면'
+                  aria-label='이미지 전체화면 보기'
                 >
                   <Maximize2 className='h-5 w-5' />
                 </button>
@@ -179,6 +179,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           <button
             onClick={() => setIsImageFullscreen(false)}
             className='absolute top-4 right-4 p-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors'
+            aria-label='전체화면 닫기'
           >
             <X className='h-6 w-6' />
           </button>
@@ -259,13 +260,17 @@ export function Projects() {
               <Filter className='h-4 w-4 text-muted-foreground' />
               <h3 className='text-sm font-semibold text-foreground'>회사</h3>
             </div>
-            <div className='flex flex-wrap gap-2'>
+            <div className='flex flex-wrap gap-2' role='group' aria-label='회사별 필터'>
               {companies.map((company) => (
                 <Badge
                   key={company}
                   variant={selectedCompany === company ? 'default' : 'outline'}
                   className='cursor-pointer hover:bg-primary/10 transition-colors'
                   onClick={() => setSelectedCompany(company)}
+                  role='button'
+                  tabIndex={0}
+                  aria-pressed={selectedCompany === company}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedCompany(company)}
                 >
                   {company}
                 </Badge>
@@ -281,13 +286,17 @@ export function Projects() {
                 기술 스택
               </h3>
             </div>
-            <div className='flex flex-wrap gap-2'>
+            <div className='flex flex-wrap gap-2' role='group' aria-label='기술 스택 필터'>
               {techStacks.map((tech) => (
                 <Badge
                   key={tech}
                   variant={selectedTech === tech ? 'default' : 'outline'}
                   className='cursor-pointer hover:bg-primary/10 transition-colors'
                   onClick={() => setSelectedTech(tech)}
+                  role='button'
+                  tabIndex={0}
+                  aria-pressed={selectedTech === tech}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedTech(tech)}
                 >
                   {tech}
                 </Badge>
@@ -325,6 +334,10 @@ export function Projects() {
               onClick={() => setSelectedProject(project)}
               data-aos='zoom-in'
               data-aos-delay={index * 100}
+              tabIndex={0}
+              role='button'
+              aria-label={`${project.title} 프로젝트 상세 보기`}
+              onKeyDown={(e) => e.key === 'Enter' && setSelectedProject(project)}
             >
               {/* Thumbnail Image */}
               <div className='relative w-full h-52 overflow-hidden bg-muted'>
@@ -416,6 +429,10 @@ export function Projects() {
                 onClick={() => setSelectedProject(project)}
                 data-aos='zoom-in'
                 data-aos-delay={index * 100}
+                tabIndex={0}
+                role='button'
+                aria-label={`${project.title} 프로젝트 상세 보기`}
+                onKeyDown={(e) => e.key === 'Enter' && setSelectedProject(project)}
               >
                 {/* Thumbnail Image */}
                 <div className='relative w-full h-52 overflow-hidden bg-muted'>

@@ -51,7 +51,7 @@ export function Contact() {
               <div className="grid sm:grid-cols-2 gap-6">
                 {contactItems.map((item) => (
                   <div key={item.label} className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0" aria-hidden="true">
                       <item.icon className="h-5 w-5 text-primary" />
                     </div>
                     <div>

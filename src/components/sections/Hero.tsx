@@ -75,12 +75,14 @@ export function Hero() {
               target='_blank'
               rel='noopener noreferrer'
               className='text-muted-foreground hover:text-foreground transition-colors'
+              aria-label='GitHub 프로필 (새 탭에서 열림)'
             >
               <Github className='h-6 w-6' />
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
               className='text-muted-foreground hover:text-foreground transition-colors'
+              aria-label='이메일로 연락하기'
             >
               <Mail className='h-6 w-6' />
             </a>
@@ -91,6 +93,7 @@ export function Hero() {
             <a
               href='#about'
               className='text-muted-foreground hover:text-foreground transition-colors'
+              aria-label='아래로 스크롤하기'
             >
               <ArrowDown className='h-6 w-6' />
             </a>

@@ -20,7 +20,8 @@ function ThemeButton({ icon, label, isActive, onClick }: ThemeButtonProps) {
           ? 'bg-muted-foreground/50 text-foreground'
           : 'text-muted-foreground',
       )}
-      aria-label={label}
+      aria-label={`${label} 테마`}
+      aria-pressed={isActive}
     >
       {icon}
     </button>

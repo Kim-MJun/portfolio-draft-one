@@ -17,7 +17,7 @@ export function Experience() {
 
         <div className='relative'>
           {/* Timeline line */}
-          <div className='absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2' />
+          <div className='absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2' aria-hidden='true' />
 
           <div className='space-y-12'>
             {experiences.map((exp, index) => (
@@ -30,7 +30,7 @@ export function Experience() {
                 data-aos-delay={index * 100}
               >
                 {/* Timeline dot */}
-                <div className='absolute left-0 md:left-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background md:-translate-x-1/2 -translate-x-1/2' />
+                <div className='absolute left-0 md:left-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background md:-translate-x-1/2 -translate-x-1/2' aria-hidden='true' />
 
                 {/* Content */}
                 <div

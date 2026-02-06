@@ -44,7 +44,7 @@ export function About() {
               data-aos-delay={index * 100}
             >
               <CardContent className='p-6'>
-                <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4'>
+                <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4' aria-hidden='true'>
                   <strength.icon className='h-6 w-6 text-accent' />
                 </div>
                 <h3 className='text-lg font-semibold text-foreground mb-2'>

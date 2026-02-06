@@ -95,29 +95,31 @@ export function ContactFormModal({
           {/* 이름 */}
           <div className='space-y-2'>
             <Label htmlFor='name'>
-              이름 <span className='text-destructive'>*</span>
+              이름 <span className='text-destructive' aria-hidden='true'>*</span>
             </Label>
             <Input
               id='name'
               placeholder='홍길동'
+              aria-required='true'
               {...register('name', {
                 required: '이름을 입력해주세요',
               })}
             />
             {errors.name && (
-              <p className='text-sm text-destructive'>{errors.name.message}</p>
+              <p className='text-sm text-destructive' role='alert'>{errors.name.message}</p>
             )}
           </div>
 
           {/* 이메일 */}
           <div className='space-y-2'>
             <Label htmlFor='email'>
-              이메일 <span className='text-destructive'>*</span>
+              이메일 <span className='text-destructive' aria-hidden='true'>*</span>
             </Label>
             <Input
               id='email'
               type='email'
               placeholder='example@email.com'
+              aria-required='true'
               {...register('email', {
                 required: '이메일을 입력해주세요',
                 pattern: {
@@ -127,24 +129,25 @@ export function ContactFormModal({
               })}
             />
             {errors.email && (
-              <p className='text-sm text-destructive'>{errors.email.message}</p>
+              <p className='text-sm text-destructive' role='alert'>{errors.email.message}</p>
             )}
           </div>
 
           {/* 제목 */}
           <div className='space-y-2'>
             <Label htmlFor='subject'>
-              제목 <span className='text-destructive'>*</span>
+              제목 <span className='text-destructive' aria-hidden='true'>*</span>
             </Label>
             <Input
               id='subject'
               placeholder='문의 제목'
+              aria-required='true'
               {...register('subject', {
                 required: '제목을 입력해주세요',
               })}
             />
             {errors.subject && (
-              <p className='text-sm text-destructive'>
+              <p className='text-sm text-destructive' role='alert'>
                 {errors.subject.message}
               </p>
             )}
@@ -153,12 +156,13 @@ export function ContactFormModal({
           {/* 메시지 */}
           <div className='space-y-2'>
             <Label htmlFor='message'>
-              메시지 <span className='text-destructive'>*</span>
+              메시지 <span className='text-destructive' aria-hidden='true'>*</span>
             </Label>
             <Textarea
               id='message'
               placeholder='문의하실 내용을 입력해주세요'
               rows={5}
+              aria-required='true'
               {...register('message', {
                 required: '메시지를 입력해주세요',
                 minLength: {
@@ -168,7 +172,7 @@ export function ContactFormModal({
               })}
             />
             {errors.message && (
-              <p className='text-sm text-destructive'>
+              <p className='text-sm text-destructive' role='alert'>
                 {errors.message.message}
               </p>
             )}

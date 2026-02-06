@@ -60,6 +60,9 @@ export function Header() {
               variant='ghost'
               size='icon'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls='mobile-navigation'
             >
               {isMobileMenuOpen ? (
                 <X className='h-5 w-5' />
@@ -72,7 +75,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className='md:hidden py-4 border-t border-border'>
+          <nav id='mobile-navigation' className='md:hidden py-4 border-t border-border'>
             <div className='flex flex-col gap-4'>
               {navItems.map((item) => (
                 <a
