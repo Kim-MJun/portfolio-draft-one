@@ -127,18 +127,28 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* Achievements */}
             <div>
-              <h3 className='font-semibold text-foreground mb-2'>주요 성과</h3>
-              <ul className='space-y-2'>
-                {project.achievements.map((achievement, index) => (
-                  <li
-                    key={index}
-                    className='flex items-start gap-2 text-sm text-muted-foreground'
-                  >
-                    <CheckCircle2 className='h-4 w-4 text-primary mt-0.5 shrink-0' />
-                    <span>{achievement}</span>
-                  </li>
+              <div className='space-y-4'>
+                {project.achievements.map((group, groupIndex) => (
+                  <div key={groupIndex}>
+                    {
+                      <h3 className='font-bold text-accent mb-2'>
+                        {group.category}
+                      </h3>
+                    }
+                    <ul className='space-y-1.5'>
+                      {group.items.map((item, index) => (
+                        <li
+                          key={index}
+                          className='flex items-start gap-2 text-sm text-muted-foreground'
+                        >
+                          <CheckCircle2 className='h-4 w-4 text-primary mt-0.5 shrink-0' />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
             {/* Live URL */}
@@ -194,7 +204,9 @@ export function Projects() {
 
   // 회사 목록 추출
   const companies = useMemo(() => {
-    const uniqueCompanies = Array.from(new Set(mainProjects.map((p) => p.company)));
+    const uniqueCompanies = Array.from(
+      new Set(mainProjects.map((p) => p.company)),
+    );
     return ['전체', ...uniqueCompanies];
   }, []);
 
@@ -456,7 +468,10 @@ export function Projects() {
 
                   <div className='flex flex-wrap gap-1'>
                     {project.techStack.slice(0, 4).map((tech) => (
-                      <span key={tech} className='text-xs text-muted-foreground'>
+                      <span
+                        key={tech}
+                        className='text-xs text-muted-foreground'
+                      >
                         {tech}
                       </span>
                     ))}

@@ -11,6 +11,11 @@ import naonThumbnail from '@/assets/naon_thumbnail.png';
 import batangThumbnail from '@/assets/batang_thumbnail.png';
 import sosThumbnail from '@/assets/sos_thumbnail.jpeg';
 
+export interface AchievementCategory {
+  category: string;
+  items: string[];
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -19,7 +24,7 @@ export interface Project {
   description: string;
   techStack: string[];
   role: string;
-  achievements: string[];
+  achievements: AchievementCategory[];
   highlights: string[];
   liveUrl?: string;
   thumbnail?: string;
@@ -134,7 +139,7 @@ export const mainProjects: Project[] = [
     period: '2025.02 ~ 2025.09',
     company: '에이치디에스(주)',
     description:
-      '2025 APEC 정상회의 행사장 통합 관제 시스템. Cesium 3D GIS 기반으로 CCTV, 로봇 등 장비를 실시간 모니터링하고 AI 이벤트 감지 시 자동 스트리밍을 제공하는 관제 솔루션.',
+      '2025 APEC 정상회의 행사장 통합 관제 시스템. Cesium 3D GIS 지도에서 CCTV·로봇 등 수백 대 장비의 실시간 모니터링과 AI 이벤트 감지 시 즉각적인 HLS 스트리밍 연동을 담당했습니다.',
     techStack: [
       'React',
       'TypeScript',
@@ -146,11 +151,41 @@ export const mainProjects: Project[] = [
     ],
     role: '프론트엔드 엔지니어 6명 / 개인 기여도 30%',
     achievements: [
-      'Cesium 3D GIS 지도 위 장비별 Entity 노드 시스템 구축 및 CCTV 시야각(FOV) 시각화 개발',
-      'WebSocket + HLS.js 기반 AI 이벤트 감지 시 실시간 스트리밍 자동 연동 로직 구현',
-      'Bounding Box 기반 객체 탐지 결과 영상 오버레이 기능 개발',
-      'Zustand 기반 전역 상태 관리 스토어 9개 설계 및 커스텀 훅 9개 개발',
-      '관제 요원의 상황 인지 속도 개선 및 즉각적 대응 체계 구축',
+      {
+        category: 'GIS 지도 핵심 기능',
+        items: [
+          'Cesium 3D GIS 기반 장비별 Entity 노드 시스템 아키텍처 설계 및 구현',
+          'CCTV 시야각(FOV) 시각화 컴포넌트 자체 개발로 장비 배치 현황 직관화',
+          '로봇 등 이동체 실시간 위치 추적 및 인터랙티브 팝업 기능 구현',
+          '이벤트 강조 애니메이션으로 관제 요원 상황 인지 속도 향상',
+          // 'Cesium semiMajorAxis 렌더링 버그 원인 분석 및 자체 해결',
+        ],
+      },
+      {
+        category: '실시간 스트리밍 연동',
+        items: [
+          'WebSocket 기반 AI 이벤트 감지 → 자동 스트리밍 연동 로직 설계 및 구현',
+          'HLS.js 활용 다중 장비 실시간 영상 스트리밍 동시 처리',
+          'Bounding Box 기반 AI 객체 탐지 결과 영상 오버레이 기능 개발',
+        ],
+      },
+      {
+        category: '아키텍처 & 공통 모듈',
+        items: [
+          'Zustand 기반 전역 상태 관리 스토어 9개 설계로 상태 흐름 일관성 확보',
+          'WebSocket·Cesium 연동 등 재사용 가능한 커스텀 훅 9개 개발',
+          '장비목록 DnD(Drag and Drop) UI 및 사용자 경험 최적화',
+          '세션 에러 핸들링 및 인증 플로우 구현',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '3D GIS + WebSocket 실시간 연동으로 관제 요원의 즉각적 상황 대응 체계 구축',
+          'Entity 노드 시스템 및 FOV 시각화로 장비 운영 효율성 향상',
+          'AI 이벤트 자동 스트리밍 팝업으로 위협 감지 대응 시간 단축에 기여',
+        ],
+      },
     ],
     highlights: ['3D GIS', '실시간 스트리밍', 'AI 이벤트 감지'],
     thumbnail: apec2025Thumbnail,
@@ -162,21 +197,41 @@ export const mainProjects: Project[] = [
     period: '2023.09 ~ 2024.01',
     company: '지피다(주)',
     description:
-      '데이터 급증으로 인한 성능 저하 문제 해결. ElasticSearch 도입 및 DB 마이그레이션을 통한 시스템 안정화.',
+      '데이터 기하급수적 증가로 인한 시스템 성능 저하 및 서비스 중단 현상 해결을 위한 고도화 프로젝트. ElasticSearch 도입을 주도하여 검색 응답시간 90% 단축을 달성했습니다.',
     techStack: [
       'Next.js',
       'TypeScript',
       'Ant Design',
       'ElasticSearch',
-      'MySQL',
+      'MariaDB',
     ],
     role: '프론트엔드 엔지니어 3명, 디자이너 1명 / 개인 기여도 40%',
     achievements: [
-      'Python 검색 알고리즘을 ElasticSearch로 전환하여 응답시간 90% 단축',
-      'React → Next.js 마이그레이션 및 전체 UI/UX 리뉴얼',
-      'MongoDB → MariaDB 마이그레이션으로 데이터 관리 효율 향상',
-      'Java SpringBoot → Next.js API로 백엔드 마이그레이션 진행',
-      '검색 시 서비스 중단 현상 해결 및 시스템 안정성 확보',
+      {
+        category: 'Frontend 마이그레이션',
+        items: [
+          'React → Next.js 전체 마이그레이션 및 UI/UX 리뉴얼',
+          'Python 검색 알고리즘을 ElasticSearch로 전환 주도 개발',
+          '검색 알고리즘 기반 시각화 그래프 기능 개선',
+          '성능 개선을 위한 기존 코드 리팩토링',
+        ],
+      },
+      {
+        category: 'Backend 마이그레이션',
+        items: [
+          'Java SpringBoot → Next.js API 마이그레이션',
+          'Python API → Next.js API 마이그레이션',
+          'MongoDB → MariaDB 마이그레이션 (NoSQL → RDB 전환)',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          'ElasticSearch 도입으로 검색 응답시간 90% 단축',
+          '검색 시 서비스 중단 현상 해결 및 시스템 안정성 확보',
+          'NoSQL → RDB 전환으로 데이터 관리 효율 및 시스템 성능 최적화',
+        ],
+      },
     ],
     highlights: ['성능 최적화 90%', 'ElasticSearch', '마이그레이션'],
     thumbnail: cybercrimeThumbnail,
@@ -188,7 +243,7 @@ export const mainProjects: Project[] = [
     period: '2024.02 ~ 2024.10',
     company: '지피다(주)',
     description:
-      '국제공항 내 보안 업무 개선을 위한 시스템 고도화. 공사 결재라인 커스터마이징 기능 개발 및 DB 마이그레이션을 통한 성능 최적화.',
+      '인천국제공항 내 보안 유지 업무 개선 및 증가하는 공사로 인한 보안요구 사항 처리를 위한 시스템 고도화 프로젝트. 공사 프로세스 기반 커스텀 결재라인 기능을 주도적으로 설계·개발하여 업무 효율성을 크게 향상시켰습니다.',
     techStack: [
       'Next.js 14',
       'TypeScript',
@@ -199,11 +254,33 @@ export const mainProjects: Project[] = [
     ],
     role: '프론트엔드 엔지니어 3명, 디자이너 1명 / 개인 기여도 40%',
     achievements: [
-      '공사 프로세스 기반 커스텀 결재라인 설계 및 개발 주도 (FLEX 결재 벤치마킹)',
-      'Next.js 14 Server Actions 활용한 풀스택 개발 및 공용 CRUD 라이브러리 개발',
-      'DB 설계 및 스키마 작성, 결재 알림 시스템 플로우 설계',
-      'JWT 토큰 + 쿠키 기반 인증 시스템 구현',
-      '정적 결재라인에서 커스텀 결재라인으로 전환하여 업무 효율성 대폭 향상',
+      {
+        category: 'Frontend 개발',
+        items: [
+          '공사 프로세스 기반 커스텀 결재라인 설계 및 개발 주도',
+          '결재 알림 및 메일 전송 기능 개발',
+          'Excel 및 한글 파일 템플릿 문서를 HTML/JSX로 퍼블리싱',
+          'JWT 토큰 + 쿠키 기반 유저 인증 시스템 구현',
+          '재사용성을 고려한 공용 컴포넌트 개발',
+        ],
+      },
+      {
+        category: 'Backend 개발',
+        items: [
+          'Next.js 14 Server Actions 활용한 풀스택 개발',
+          'Prisma 벤치마킹한 공용 CRUD 라이브러리 자체 개발',
+          'DB 설계 및 스키마 작성 (dbdiagram 활용)',
+          '공사 결재라인 스키마 및 기능 플로우 설계',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '정적 결재라인 → 커스텀 결재라인 전환으로 업무 효율성 대폭 향상',
+          'UI/UX 개선 및 DB 마이그레이션으로 시스템 응답속도 개선',
+          '폐쇄망 환경 배포 및 유지보수 수행',
+        ],
+      },
     ],
     highlights: ['커스텀 결재라인', '풀스택 개발', '폐쇄망 배포'],
     thumbnail: incheonThumbnail,
@@ -215,15 +292,35 @@ export const mainProjects: Project[] = [
     period: '2023.05 ~ 2023.09',
     company: '지피다(주)',
     description:
-      'Excel 기반 세무 작업을 웹 기반 자동화 시스템으로 전환. PDF 데이터 자동 추출 및 통계 자동 계산 기능 구현.',
+      '기존 Excel 기반 세무 업무를 웹 기반 자동화 시스템으로 전환하는 프로젝트. PDF 데이터 자동 추출 및 통계 자동 계산 기능을 개발하여 작업 시간을 80% 이상 단축시켰습니다.',
     techStack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'AWS EC2'],
     role: '프론트엔드 엔지니어 2명 / 개인 기여도 50%',
     achievements: [
-      '원천징수부 PDF 파일 데이터 자동 추출 및 DB화 알고리즘 개발',
-      'Excel 수식을 웹 기반 자동 계산 알고리즘으로 전환하여 작업 시간 80% 이상 단축',
-      'Prisma + PostgreSQL 기반 DB 스키마 설계 및 API 개발',
-      'AWS EC2 + PM2 무중단 배포 환경 구축',
-      '세무 작업 정확성 보장 및 업무 효율화 달성',
+      {
+        category: 'Frontend 개발',
+        items: [
+          '원천징수부 PDF 파일 업로드 시 필요 데이터만 추출해 자동 DB화 로직 개발',
+          '자동 DB화된 데이터 기반 인원 및 금액 통계 자동화 기능 구현',
+          'Excel 수식 → 웹 기반 자동 계산 알고리즘으로 전환',
+          '관리자/작업자 권한별 기능 및 페이지 접근 제어 알고리즘 개발',
+        ],
+      },
+      {
+        category: 'Backend & 인프라',
+        items: [
+          'Next.js API + Prisma + PostgreSQL 기반 데이터 관리 시스템 구축',
+          'ER다이어그램 및 Prisma Schema 활용한 DB 스키마 설계',
+          'AWS EC2 + PM2를 활용한 무중단 배포 환경 구축',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          'Excel 기반 수동 작업 → 자동화 전환으로 작업 시간 80% 이상 단축',
+          'PDF 자동 DB화 알고리즘으로 결과물 일관성 및 세무 작업 정확성 보장',
+          '클라이언트 업무 능률 대폭 향상',
+        ],
+      },
     ],
     highlights: ['작업 시간 80% 단축', 'PDF 자동 파싱', '무중단 배포'],
   },
@@ -233,15 +330,43 @@ export const mainProjects: Project[] = [
     period: '2021.12 ~ 2023.12',
     company: '지피다(주)',
     description:
-      'B2G 사업으로 아시아·태평양 사이버범죄 역량강화 허브 홈페이지 개발. 3년간 지속적인 고도화 작업 진행.',
+      'B2G 사업으로 아시아·태평양 사이버범죄 역량강화 허브 홈페이지를 3년간 지속적으로 개발·고도화한 프로젝트. 비대면 온라인 교육 시스템과 부정방지 로직을 주도적으로 개발했습니다.',
     techStack: ['Next.js', 'SASS', 'MariaDB', 'Strapi', 'Figma'],
     role: '프론트엔드 엔지니어 3명, 디자이너 1명 / 개인 기여도 40%',
     achievements: [
-      '비대면 온라인 교육 시스템 개발 (plyr-react 활용)',
-      '교육 완료 후 퀴즈, 설문조사 기능 및 수료증 발급 기능 개발',
-      '비대면 온라인 교육 수강 부정방지 로직 개발',
-      'Google reCAPTCHA를 이용한 보안 인증 시스템 개선',
-      '폐쇄망 환경 배포 및 유지보수',
+      {
+        category: '온라인 교육 시스템',
+        items: [
+          'plyr-react 모듈 활용한 비대면 온라인 교육 시스템 개발',
+          '교육 완료 후 퀴즈, 설문조사 및 수료증 발급 기능 개발',
+          '교육 진행현황 실시간 추적 기능 구현',
+          '강의 순서 지정 및 퀴즈 문항 랜덤배치 로직 개발',
+        ],
+      },
+      {
+        category: 'UI/UX & 성능 최적화',
+        items: [
+          'Desktop, Tablet, Mobile 반응형 UI/UX 대대적 리뉴얼',
+          '페이지별 SSR, SSG 최적화로 로딩 속도 개선',
+          '홈페이지 UI/UX 개선 및 모바일 반응형 강화',
+        ],
+      },
+      {
+        category: '보안 & 인증 강화',
+        items: [
+          '비대면 온라인 교육 수강 부정방지 로직 자체 개발',
+          'Google reCAPTCHA 기반 보안 인증 시스템 개선',
+          '비밀번호 5회 오류 시 접근제한 기능 개발',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '부정수강 방지 로직으로 클라이언트 만족도 및 안정성 향상',
+          'UI/UX 리팩토링으로 시스템 응답 속도 및 사용자 경험 개선',
+          '폐쇄망 환경 배포 및 3년간 안정적 운영',
+        ],
+      },
     ],
     highlights: ['온라인 교육 시스템', '실서비스 운영', 'B2G 사업'],
     liveUrl: 'https://apc-hub.org/',
@@ -261,10 +386,27 @@ export const etcProjects: Project[] = [
     techStack: ['React', 'TypeScript', 'TanStack Query', 'Ant Design', 'Vite'],
     role: '프론트엔드 6명 / 기여도 15%',
     achievements: [
-      'APK/IPA 바이너리 파일 업로드 및 버전 관리 기능 구현',
-      '기획 변경에 따른 리팩토링 수행 (코드량 40% 감소)',
-      '삭제 시 빈 페이지 방지를 위한 페이지네이션 오프셋 자동 보정 로직 구현',
-      '변경된 필드만 서버에 전송하는 최적화 적용',
+      {
+        category: '앱 배포 관리 시스템',
+        items: [
+          'APK/IPA 바이너리 파일 업로드 및 버전 관리 기능 구현',
+          'FormData + Query Parameter 조합한 multipart API 설계로 백엔드 스펙 호환성 확보',
+          '기획 변경에 따른 리팩토링 수행 (코드량 40% 감소)',
+        ],
+      },
+      {
+        category: '임시 사용자 계정 관리',
+        items: [
+          '삭제 시 빈 페이지 방지를 위한 페이지네이션 오프셋 자동 보정 로직 구현',
+          '수정 시 변경된 필드만 서버에 전송하는 최적화 적용 (불필요한 API 호출 방지)',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '기획 변경 대응 시 기존 대비 코드량 40% 감소로 유지보수성 개선',
+        ],
+      },
     ],
     highlights: ['백오피스', '앱 배포 관리'],
     thumbnail: locationThumbnail,
@@ -276,14 +418,33 @@ export const etcProjects: Project[] = [
     period: '2023.01 ~ 2023.03',
     company: '지피다(주)',
     description:
-      '자사 웹사이트 전면 리뉴얼. Next.js와 Notion API를 이용해 현대적인 디자인과 클라우드 기반 인프라로 전환하여 관리 효율성과 성능 개선.',
-    techStack: ['Next.js', 'Notion API', 'Figma'],
+      '자사 웹사이트 전면 리뉴얼 프로젝트. Next.js와 Notion API를 활용해 현대적인 디자인과 클라우드 기반 인프라로 전환하여 관리 효율성과 성능을 크게 개선했습니다.',
+    techStack: ['Next.js', 'Notion API', 'Figma', 'styled-components'],
     role: '프론트엔드 엔지니어 2명, 디자이너 1명 / 개인 기여도 50%',
     achievements: [
-      'Next.js CSR, SSR 등 페이지별 최적 렌더링 도입',
-      'Notion API를 이용한 웹사이트 데이터 연동 개발',
-      'Notion Database 기반 콘텐츠 관리 시스템(CMS) 구축',
-      '비개발자도 쉽게 관리할 수 있는 관리자 시스템으로 관리 효율성 향상',
+      {
+        category: 'Frontend 개발',
+        items: [
+          '기존 딱딱한 웹사이트를 현대적인 디자인 및 직관적인 UI/UX로 개선',
+          'Next.js CSR, SSR 등 페이지별 최적 렌더링 도입',
+          'Notion API를 이용한 웹사이트 데이터 연동 개발',
+        ],
+      },
+      {
+        category: '관리자 시스템 구축',
+        items: [
+          'Notion API + Notion Database 기반 백엔드 시스템 구축',
+          'Notion Database를 활용한 콘텐츠 관리 시스템(CMS) 구축',
+          'Notion Database 스키마 설계로 DB 역할 수행',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          'Notion 기반 관리자 시스템으로 비개발자도 쉽게 관리 가능',
+          '관리 효율성 및 사용성 크게 향상',
+        ],
+      },
     ],
     highlights: ['웹사이트 리뉴얼', 'Notion CMS'],
     liveUrl: 'https://apexesc.com/',
@@ -296,14 +457,33 @@ export const etcProjects: Project[] = [
     period: '2022.01 ~ 2022.04',
     company: '지피다(주)',
     description:
-      '독도의용수비대 기념사업회 웹사이트를 최신 기술과 인터페이스로 리뉴얼. 반응형 UI/UX 및 관리자 기능 개발.',
+      '독도의용수비대 기념사업회 웹사이트를 최신 기술과 인터페이스로 리뉴얼하는 프로젝트. 반응형 UI/UX 및 관리자 기능을 주도적으로 개발했습니다.',
     techStack: ['Next.js', 'Strapi', 'SASS', 'Figma'],
     role: '프론트엔드 엔지니어 2명, 디자이너 1명 / 개인 기여도 50%',
     achievements: [
-      'Desktop, Tablet, Mobile 반응형 UI/UX 개발',
-      '텍스트 게시판 및 이미지 게시판 등 설계, 개발 주도',
-      'Editorjs 도입으로 Client 페이지 내 직관적인 Admin 기능 구현',
-      'Headless CMS인 Strapi를 이용한 백엔드 구축',
+      {
+        category: 'Frontend 개발',
+        items: [
+          'Desktop, Tablet, Mobile 반응형 UI/UX 개발',
+          '텍스트 게시판 및 이미지 게시판 등 설계, 개발 주도',
+          '페이지별 CSR/SSR 최적화로 페이지별 성능 개선',
+          '관리자/일반 사용자 권한별 분기 처리로 사용자 편의성 향상',
+        ],
+      },
+      {
+        category: 'Admin 기능 개발',
+        items: [
+          'Client 페이지에서 관리자 로그인 시 각 페이지에서 직접 수정 가능하도록 설계',
+          'Editor.js 라이브러리 도입으로 직관적인 콘텐츠 편집 기능 구현',
+        ],
+      },
+      {
+        category: 'Backend 구축',
+        items: [
+          'Headless CMS인 Strapi를 이용한 백엔드 구축',
+          '프로젝트 분석 후 DB Schema 설계',
+        ],
+      },
     ],
     highlights: ['웹사이트 리뉴얼', 'Headless CMS'],
     thumbnail: dokdoThumbnail,
@@ -315,14 +495,28 @@ export const etcProjects: Project[] = [
     period: '2022.04 ~ 2022.07',
     company: '지피다(주)',
     description:
-      'NFT 및 3D 가상 공간을 결합한 마켓플레이스 웹사이트 개발. 고객 맞춤형 아이템을 활용해 가상 전시관을 제공하는 시스템.',
-    techStack: ['Next.js', 'Notion API', 'Figma', 'AWS EC2'],
+      'NFT 및 3D 가상 공간을 결합한 마켓플레이스 웹사이트 개발. 고객 맞춤형 아이템을 활용해 가상 전시관을 제공하는 시스템입니다.',
+    techStack: ['Next.js', 'Notion API', 'Figma', 'AWS EC2', 'Shapespark'],
     role: '프론트엔드 엔지니어 2명, 디자이너 1명, 3D 공간 제작자 1명 / 개인 기여도 40%',
     achievements: [
-      'Desktop, Tablet, Mobile 반응형 UI/UX 개발',
-      '사용자 맞춤형 3D공간 생성 및 수정 기능 개발',
-      'SSR 개발로 페이지 응답 향상',
-      'Notion API 기반 백엔드 시스템 및 DB 스키마 설계',
+      {
+        category: 'Frontend 개발',
+        items: [
+          'Figma Overlay를 활용한 디자인팀 협업 및 웹사이트 UI/UX 개발',
+          'Desktop, Tablet, Mobile 반응형 UI/UX 개발',
+          '사용자 맞춤형 3D공간 생성 및 수정 기능 개발',
+          'SSR 개발로 페이지 응답 속도 향상',
+          '3D 공간 내 공용 컴포넌트 개발',
+        ],
+      },
+      {
+        category: 'Backend 구축',
+        items: [
+          'Notion API를 이용한 백엔드 시스템 구축',
+          'Notion Database 스키마 설계 및 DB 구축',
+          'Notion Database를 이용한 데이터 관리 시스템 구축',
+        ],
+      },
     ],
     highlights: ['NFT', '3D 가상공간', 'SSR'],
     thumbnail: olidaThumbnail,
@@ -334,7 +528,7 @@ export const etcProjects: Project[] = [
     period: '2022.07 ~ 2022.08',
     company: '지피다(주)',
     description:
-      '커스터마이징 가능한 대시보드와 시각화 차트 기능 구현. 사용자 필요에 맞게 유연하게 구성할 수 있는 기능 제공.',
+      '커스터마이징 가능한 대시보드와 시각화 차트 기능을 구현한 솔루션 프로젝트. 사용자 필요에 맞게 유연하게 구성할 수 있는 기능을 제공합니다.',
     techStack: [
       'Next.js',
       'Ant Design',
@@ -344,10 +538,29 @@ export const etcProjects: Project[] = [
     ],
     role: '프론트엔드 엔지니어 3명, 디자이너 1명 / 개인 기여도 30%',
     achievements: [
-      'nivo 차트 라이브러리를 이용한 커스텀 패널 컴포넌트 개발',
-      '토폴로지 기능 개발 및 node & edge 좌표값 기반 커스터마이징',
-      '커스터마이징 패널 CRUD API 개발',
-      '각 카드별 차트 선택 기능 및 API 연동으로 데이터 연계 효율성 향상',
+      {
+        category: '차트 & 패널 개발',
+        items: [
+          'nivo 차트 라이브러리를 이용한 커스텀 패널 컴포넌트 개발',
+          '각 패널에 대한 커스터마이징 기능 개발',
+          '각 카드별 차트 선택 기능 및 API 연동으로 데이터 연계 효율성 향상',
+        ],
+      },
+      {
+        category: '토폴로지 기능',
+        items: [
+          '토폴로지 기능 개발 참여',
+          'node & edge 좌표값 기반 토폴로지 커스터마이징',
+          '커스터마이징 패널 CRUD API 개발',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          'nivo 차트 기반 유연한 커스텀 패널 개발로 사용성 향상',
+          '차트 선택 및 API 연동으로 데이터 연계 효율성 향상',
+        ],
+      },
     ],
     highlights: ['시각화', '대시보드', '커스텀 차트'],
     thumbnail: naonThumbnail,
@@ -359,13 +572,27 @@ export const etcProjects: Project[] = [
     period: '2022.09 ~ 2022.12',
     company: '지피다(주)',
     description:
-      'AI기반 불법 촬영물 유포 탐지 및 피해자 지원 시스템 웹사이트 구축. 수사관의 효율적인 수사 진행과 관리를 위한 종합 시스템.',
+      'AI기반 불법 촬영물 유포 탐지 및 피해자 지원 시스템 웹사이트 구축 프로젝트. 수사관의 효율적인 수사 진행과 관리, 피해자 지원을 포함한 종합 시스템입니다.',
     techStack: ['Next.js', 'TypeScript', 'Ant Design', 'NestJS'],
     role: '프론트엔드 1명, 백엔드 1명, 인프라 1명 / 개인 기여도 25%',
     achievements: [
-      'React → Next.js 마이그레이션 작업',
-      'Figma, Ant Design, Next.js를 이용한 UI/UX 개발',
-      'NestJS 기반 backend API 개발 참여',
+      {
+        category: 'Frontend 개발',
+        items: [
+          '기존 React → Next.js 마이그레이션 작업',
+          'Figma 기반 디자인 협업 및 Ant Design + Next.js 활용 UI/UX 개발',
+        ],
+      },
+      {
+        category: 'Backend 개발',
+        items: ['NestJS 기반 backend API 개발 참여'],
+      },
+      {
+        category: '성과',
+        items: [
+          '기존 프로젝트 작업자가 아니었으나, 개발 지원으로 투입되어 프로젝트 성공적 마무리에 기여',
+        ],
+      },
     ],
     highlights: ['시스템 고도화', '마이그레이션'],
   },
@@ -375,7 +602,7 @@ export const etcProjects: Project[] = [
     period: '2021.08 ~ 2022.01',
     company: '지피다(주)',
     description:
-      '건축물 현장조사 및 하자보수 관리를 위한 모바일앱 개발. 오프라인 환경에서도 작업 가능하도록 설계.',
+      '건축물 현장조사 및 하자보수 관리를 위한 모바일앱 개발 프로젝트. 기존 수기 작업의 불편함을 개선하고, 오프라인 환경에서도 작업 가능하도록 설계했습니다.',
     techStack: [
       'React Native',
       'Redux',
@@ -385,10 +612,38 @@ export const etcProjects: Project[] = [
     ],
     role: '프론트엔드 엔지니어 2명, 디자이너 1명 / 개인 기여도 50%',
     achievements: [
-      '도면 내 ZOOM 기능 도입 및 상대 좌표값 알고리즘 개발',
-      '오프라인 환경 작업을 위한 LocalStorage 기반 데이터 관리 설계 및 개발',
-      '데이터 유무 판단 알고리즘 개발로 오프라인 작업 효율성 향상',
-      'Strapi를 이용한 Headless CMS 백엔드 구축',
+      {
+        category: 'Frontend 개발',
+        items: [
+          'Figma Overlay를 활용한 디자인팀 협업 및 모바일 UI/UX 개발',
+          '사용자 권한별 현장 데이터 구분 알고리즘 개발',
+          'Redux를 이용한 상태관리 개발',
+          '도면 내 ZOOM 기능 도입 및 상대 좌표값 알고리즘 개발',
+        ],
+      },
+      {
+        category: '오프라인 기능 설계',
+        items: [
+          '오프라인 환경 작업을 위한 LocalStorage 기반 데이터 관리 설계 및 개발',
+          '데이터 유무 판단 알고리즘 개발로 오프라인 작업 효율성 향상',
+          'LocalStorage 데이터 관리를 위한 DB 스키마 설계 참여',
+        ],
+      },
+      {
+        category: 'Backend & 배포',
+        items: [
+          'Strapi 기반 Headless CMS 백엔드 구축',
+          '앱 ↔ 웹(관리자) 상호 소통을 위한 설계',
+          'Android APK 파일 추출로 클라이언트 배포 진행',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '수기 작업 → 모바일 앱 전환으로 현장 작업자 편의성 대폭 향상',
+          '오프라인 환경 작업 지원으로 작업 효율성 향상',
+        ],
+      },
     ],
     highlights: ['Mobile App', '오프라인 지원'],
     thumbnail: batangThumbnail,
@@ -400,14 +655,40 @@ export const etcProjects: Project[] = [
     period: '2021.07 ~ 2021.09',
     company: '지피다(주)',
     description:
-      'AI기반 사이버아동 성범죄 탐지시스템의 React Native 프론트엔드 유지보수 및 개발.',
-    techStack: ['React Native', 'Redux', 'Styled-Components', 'Firebase'],
+      'AI기반 사이버아동 성범죄 탐지시스템의 React Native 프론트엔드 유지보수 및 개발 프로젝트. 디자인 리뉴얼과 1:1 챗봇시스템을 주도적으로 개발했습니다.',
+    techStack: [
+      'React Native',
+      'Redux',
+      'Styled-Components',
+      'Firebase',
+      'WebSocket',
+    ],
     role: '프론트엔드 엔지니어 2명, 디자이너 1명 / 개인 기여도 20%',
     achievements: [
-      '모바일 UI/UX 디자인 대대적 리뉴얼 개발',
-      '구글, 카카오 등 소셜 로그인 연동 개발',
-      'Firebase를 이용한 모바일 알림 기능 개발',
-      '웹소켓 기반 1:1 챗봇시스템 설계 및 개발',
+      {
+        category: 'Frontend 개발',
+        items: [
+          'Figma Overlay를 활용한 모바일 UI/UX 디자인 대대적 리뉴얼',
+          '구글, 카카오 등 소셜 로그인 연동 개발',
+          'Firebase를 이용한 모바일 디바이스 알림 기능 개발',
+        ],
+      },
+      {
+        category: '챗봇시스템 설계 및 개발',
+        items: [
+          'WebSocket을 이용한 채팅시스템 설계',
+          '채팅 프로토콜 정의 및 설계',
+          '1:1 챗봇시스템 개발',
+        ],
+      },
+      {
+        category: '성과',
+        items: [
+          '대대적인 디자인 리뉴얼로 사용자 인터페이스 및 경험 향상',
+          'Firebase 모바일 알림 기능으로 사용성 향상',
+          '1:1 챗봇시스템 개발로 사용자 편의성 개선',
+        ],
+      },
     ],
     highlights: ['디자인 리뉴얼', '챗봇시스템'],
     thumbnail: sosThumbnail,
