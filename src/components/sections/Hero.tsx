@@ -50,7 +50,7 @@ export function Hero() {
             {personalInfo.heroSkills.map((skill, index) => (
               <Badge
                 key={skill}
-                className='animate-fade-in-up px-4 py-1.5 text-sm bg-accent/10 text-accent border border-accent/20 hover:-translate-y-1 hover:bg-accent/20 hover:border-accent/40 transition-all duration-200 cursor-default'
+                className='animate-fade-in-up px-4 py-1.5 text-sm bg-accent/15 text-accent-text border border-accent/30 hover:-translate-y-1 hover:bg-accent/25 hover:border-accent/50 transition-all duration-200 cursor-default'
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {skill}
