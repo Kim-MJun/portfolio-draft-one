@@ -14,6 +14,11 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { mainProjects, etcProjects, type Project } from '@/data/resume';
+import {
+  getUniqueCompanies,
+  getTechStacksByFrequency,
+  filterProjects,
+} from '@/lib/project-filters';
 
 interface ProjectModalProps {
   project: Project;
@@ -203,38 +208,12 @@ export function Projects() {
   const [selectedCompany, setSelectedCompany] = useState<string>('전체');
   const [selectedTech, setSelectedTech] = useState<string>('전체');
 
-  // 회사 목록 추출
-  const companies = useMemo(() => {
-    const uniqueCompanies = Array.from(
-      new Set(mainProjects.map((p) => p.company)),
-    );
-    return ['전체', ...uniqueCompanies];
-  }, []);
-
-  // 기술 스택 목록 추출 (빈도순 정렬)
-  const techStacks = useMemo(() => {
-    const techCount: Record<string, number> = {};
-    mainProjects.forEach((project) => {
-      project.techStack.forEach((tech) => {
-        techCount[tech] = (techCount[tech] || 0) + 1;
-      });
-    });
-    const sortedTechs = Object.entries(techCount)
-      .sort((a, b) => b[1] - a[1])
-      .map(([tech]) => tech);
-    return ['전체', ...sortedTechs];
-  }, []);
-
-  // 필터링된 프로젝트 목록
-  const filteredProjects = useMemo(() => {
-    return mainProjects.filter((project) => {
-      const matchCompany =
-        selectedCompany === '전체' || project.company === selectedCompany;
-      const matchTech =
-        selectedTech === '전체' || project.techStack.includes(selectedTech);
-      return matchCompany && matchTech;
-    });
-  }, [selectedCompany, selectedTech]);
+  const companies = useMemo(() => getUniqueCompanies(mainProjects), []);
+  const techStacks = useMemo(() => getTechStacksByFrequency(mainProjects), []);
+  const filteredProjects = useMemo(
+    () => filterProjects(mainProjects, selectedCompany, selectedTech),
+    [selectedCompany, selectedTech],
+  );
 
   // 필터 초기화
   const resetFilters = () => {
