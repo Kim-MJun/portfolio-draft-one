@@ -9,6 +9,7 @@ const navItems = [
   // { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -75,7 +76,10 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav id='mobile-navigation' className='md:hidden py-4 border-t border-border'>
+          <nav
+            id='mobile-navigation'
+            className='md:hidden py-4 border-t border-border'
+          >
             <div className='flex flex-col gap-4'>
               {navItems.map((item) => (
                 <a
