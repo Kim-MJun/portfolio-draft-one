@@ -29,5 +29,6 @@ dist-ssr
 *.sw?
 
 # 이력서 pdf 파일
-resume_v1.pdf
-resume_v2.pdf
+/resume_v1.pdf
+/resume_v2.pdf
+/resume_latest.pdf

@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Mail } from 'lucide-react';
+import { ArrowDown, FileDown, Github, Mail } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -59,9 +59,19 @@ export function Hero() {
           </div>
 
           {/* CTA Buttons */}
-          <div className='flex items-center justify-center gap-4 mb-12'>
+          <div className='flex items-center justify-center flex-wrap gap-4 mb-12'>
             <Button size='lg' asChild>
               <a href='#projects'>프로젝트 보기</a>
+            </Button>
+            <Button variant='outline' size='lg' asChild>
+              <a
+                href='/resume_latest.pdf'
+                download='이력서_김민준.pdf'
+                aria-label='이력서 PDF 다운로드'
+              >
+                <FileDown className='h-4 w-4' />
+                이력서 다운로드
+              </a>
             </Button>
             <Button variant='outline' size='lg' asChild>
               <a href='#contact'>연락하기</a>
