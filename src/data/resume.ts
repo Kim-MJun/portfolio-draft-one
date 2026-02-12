@@ -149,7 +149,7 @@ export const mainProjects: Project[] = [
       'WebSocket',
       'HLS.js',
     ],
-    role: '프론트엔드 엔지니어 6명 / 개인 기여도 30%',
+    role: '프론트엔드 엔지니어 5명 / 개인 기여도 30%',
     achievements: [
       {
         category: 'GIS 지도 핵심 기능',
@@ -384,7 +384,7 @@ export const etcProjects: Project[] = [
     description:
       '위치기반 서비스 사업자를 위한 관리자 백오피스 시스템. 프로젝트 마감을 위해 서포트로 투입하여 앱 배포 관리 및 임시 사용자 관리 기능 개발 담당.',
     techStack: ['React', 'TypeScript', 'TanStack Query', 'Ant Design', 'Vite'],
-    role: '프론트엔드 6명 / 기여도 15%',
+    role: '프론트엔드 5명 / 기여도 15%',
     achievements: [
       {
         category: '앱 배포 관리 시스템',
