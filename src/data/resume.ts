@@ -16,6 +16,15 @@ export interface AchievementCategory {
   items: string[];
 }
 
+export interface Experience {
+  company: string;
+  position: string;
+  period: string;
+  type: string;
+  description: string;
+  projects: string[];
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -97,7 +106,7 @@ export const skills = {
   ],
 };
 
-export const experiences = [
+export const experiences: Experience[] = [
   {
     company: '에이치디에스(주)',
     position: '기업부설연구소 연구원',
