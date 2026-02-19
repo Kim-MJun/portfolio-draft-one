@@ -24,13 +24,13 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
     >
       {/* Thumbnail Image */}
       <div className='relative w-full h-52 overflow-hidden bg-muted'>
-        {project.thumbnail ? (
+        {project.images?.[0] ? (
           <img
-            src={project.thumbnail}
+            src={project.images[0].src}
             alt={project.title}
             className={cn(
               'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
-              project.isBlur && 'blur-xs',
+              project.images[0].isBlur && 'blur-xs',
             )}
           />
         ) : (

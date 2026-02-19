@@ -1,8 +1,11 @@
 // 이미지 import (Vite가 빌드 시 올바르게 처리하도록)
 import apec2025Thumbnail from '@/assets/APEC2025_thumbnail.png';
 import apchubThumbnail from '@/assets/apchub_thumbnail.png';
+import apchub2025Two from '@/assets/apchub_two.png';
 import cybercrimeThumbnail from '@/assets/cybercrime_thumbnail.png';
 import incheonThumbnail from '@/assets/incheon_thumbnail.png';
+import incheonTwo from '@/assets/incheon_two.png';
+import incheonThree from '@/assets/incheon_three.png';
 import locationThumbnail from '@/assets/location_thumbnail.jpg';
 import apexescThumbnail from '@/assets/apexesc_thumbnail.png';
 import dokdoThumbnail from '@/assets/dokdo_thumbnail.png';
@@ -10,6 +13,8 @@ import olidaThumbnail from '@/assets/olida_thumbnail.png';
 import naonThumbnail from '@/assets/naon_thumbnail.png';
 import batangThumbnail from '@/assets/batang_thumbnail.png';
 import sosThumbnail from '@/assets/sos_thumbnail.jpeg';
+import sokhamThumbnail from '@/assets/sokham_thumbnail.webp';
+import sokhamTwo from '@/assets/sokham_two.webp';
 
 export interface AchievementCategory {
   category: string;
@@ -25,6 +30,11 @@ export interface Experience {
   projects: string[];
 }
 
+export interface ProjectImage {
+  src: string;
+  isBlur: boolean;
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -36,8 +46,7 @@ export interface Project {
   achievements: AchievementCategory[];
   highlights: string[];
   liveUrl?: string;
-  thumbnail?: string;
-  isBlur?: boolean;
+  images?: ProjectImage[];
 }
 
 export const personalInfo = {
@@ -197,8 +206,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['3D GIS', '실시간 스트리밍', 'AI 이벤트 감지'],
-    thumbnail: apec2025Thumbnail,
-    isBlur: true,
+    images: [{ src: apec2025Thumbnail, isBlur: true }],
   },
   {
     id: 2,
@@ -243,8 +251,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['성능 최적화 90%', 'ElasticSearch', '마이그레이션'],
-    thumbnail: cybercrimeThumbnail,
-    isBlur: true,
+    images: [{ src: cybercrimeThumbnail, isBlur: true }],
   },
   {
     id: 3,
@@ -292,8 +299,11 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['커스텀 결재라인', '풀스택 개발', '폐쇄망 배포'],
-    thumbnail: incheonThumbnail,
-    isBlur: true,
+    images: [
+      { src: incheonThumbnail, isBlur: true },
+      { src: incheonTwo, isBlur: true },
+      { src: incheonThree, isBlur: true },
+    ],
   },
   {
     id: 4,
@@ -332,6 +342,10 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['작업 시간 80% 단축', 'PDF 자동 파싱', '무중단 배포'],
+    images: [
+      { src: sokhamThumbnail, isBlur: false },
+      { src: sokhamTwo, isBlur: false },
+    ],
   },
   {
     id: 5,
@@ -379,8 +393,10 @@ export const mainProjects: Project[] = [
     ],
     highlights: ['온라인 교육 시스템', '실서비스 운영', 'B2G 사업'],
     liveUrl: 'https://apc-hub.org/',
-    thumbnail: apchubThumbnail,
-    isBlur: false,
+    images: [
+      { src: apchubThumbnail, isBlur: false },
+      { src: apchub2025Two, isBlur: false },
+    ],
   },
 ];
 
@@ -418,8 +434,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['백오피스', '앱 배포 관리'],
-    thumbnail: locationThumbnail,
-    isBlur: false,
+    images: [{ src: locationThumbnail, isBlur: false }],
   },
   {
     id: 102,
@@ -457,8 +472,7 @@ export const etcProjects: Project[] = [
     ],
     highlights: ['웹사이트 리뉴얼', 'Notion CMS'],
     liveUrl: 'https://apexesc.com/',
-    thumbnail: apexescThumbnail,
-    isBlur: false,
+    images: [{ src: apexescThumbnail, isBlur: false }],
   },
   {
     id: 103,
@@ -495,8 +509,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['웹사이트 리뉴얼', 'Headless CMS'],
-    thumbnail: dokdoThumbnail,
-    isBlur: false,
+    images: [{ src: dokdoThumbnail, isBlur: false }],
   },
   {
     id: 104,
@@ -528,8 +541,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['NFT', '3D 가상공간', 'SSR'],
-    thumbnail: olidaThumbnail,
-    isBlur: true,
+    images: [{ src: olidaThumbnail, isBlur: true }],
   },
   {
     id: 105,
@@ -572,8 +584,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['시각화', '대시보드', '커스텀 차트'],
-    thumbnail: naonThumbnail,
-    isBlur: true,
+    images: [{ src: naonThumbnail, isBlur: true }],
   },
   {
     id: 106,
@@ -655,8 +666,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['Mobile App', '오프라인 지원'],
-    thumbnail: batangThumbnail,
-    isBlur: true,
+    images: [{ src: batangThumbnail, isBlur: true }],
   },
   {
     id: 108,
@@ -700,8 +710,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['디자인 리뉴얼', '챗봇시스템'],
-    thumbnail: sosThumbnail,
-    isBlur: true,
+    images: [{ src: sosThumbnail, isBlur: true }],
   },
 ];
 
