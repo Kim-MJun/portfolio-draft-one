@@ -4,12 +4,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/data/resume';
 import profileImage from '@/assets/profile.jpeg';
+import { Stats } from '@/components/sections/Stats';
 
 export function Hero() {
   return (
     <section className='min-h-screen flex items-center justify-center pt-16 relative'>
-      <div className='max-w-6xl mx-auto px-4 sm:px-6 py-20'>
-        <div className='flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16'>
+      <div className='max-w-6xl mx-auto px-4 sm:px-6 py-16 w-full'>
+        {/* Main: Left text + Right card */}
+        <div className='flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16 mb-12'>
           {/* Left: Text Content */}
           <div className='flex-1 text-center md:text-left'>
             {/* Title */}
@@ -77,14 +79,12 @@ export function Hero() {
           {/* Right: Profile Card */}
           <div className='shrink-0'>
             <div className='bg-background border border-border rounded-2xl shadow-lg p-6 flex flex-col items-center gap-4 w-56 md:w-64'>
-              {/* Photo */}
               <img
                 src={profileImage}
                 alt='김민준 프로필'
                 className='w-28 h-28 md:w-32 md:h-32 rounded-full object-cover ring-4 ring-accent/30'
               />
 
-              {/* Name & Title */}
               <div className='text-center'>
                 <p className='font-bold text-lg text-foreground'>
                   {personalInfo.name}
@@ -94,7 +94,6 @@ export function Hero() {
                 </p>
               </div>
 
-              {/* Keywords */}
               <div className='flex flex-wrap justify-center gap-1.5'>
                 {personalInfo.keywords.map((keyword) => (
                   <Badge key={keyword} variant='secondary' className='text-xs'>
@@ -105,7 +104,6 @@ export function Hero() {
 
               <div className='w-full h-px bg-border' aria-hidden='true' />
 
-              {/* Social Links */}
               <div className='flex items-center gap-4'>
                 <a
                   href={personalInfo.github}
@@ -127,6 +125,9 @@ export function Hero() {
             </div>
           </div>
         </div>
+
+        {/* Stats */}
+        <Stats />
       </div>
 
       {/* Scroll Indicator */}

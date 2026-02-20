@@ -1,4 +1,4 @@
-import { ExternalLink, Code2 } from 'lucide-react';
+import { ExternalLink, Code2, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -39,6 +39,12 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
           </div>
         )}
         <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent' />
+        {project.metric && (
+          <div className='absolute top-3 left-3 flex items-center gap-1.5 bg-black/50 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm'>
+            <TrendingUp className='h-3 w-3 text-accent shrink-0' aria-hidden='true' />
+            <span>{project.metric}</span>
+          </div>
+        )}
       </div>
 
       <CardHeader>

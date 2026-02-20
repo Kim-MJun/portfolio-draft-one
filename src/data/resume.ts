@@ -45,6 +45,7 @@ export interface Project {
   role: string;
   achievements: AchievementCategory[];
   highlights: string[];
+  metric?: string;
   liveUrl?: string;
   images?: ProjectImage[];
 }
@@ -69,7 +70,7 @@ export const personalInfo = {
     'Slack',
     'Notion',
   ],
-  introduction: `보안 시스템, 관제 솔루션, 업무 자동화 등 다양한 도메인에서 React/Next.js 기반 프론트엔드 개발을 해왔습니다. 성능 최적화(90% 개선), 실시간 시스템 구축 등 기술적 챌린지를 해결하며, 팀 협업을 통해 실질적인 비즈니스 가치를 만들어내는 개발자입니다.`,
+  introduction: `소통과 협업을 바탕으로, 보안 관제부터 업무 자동화까지 다양한 도메인에서 React/Next.js로 비즈니스 가치를 만들어온 개발자입니다.`,
 };
 
 export const skills = {
@@ -206,6 +207,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['3D GIS', '실시간 스트리밍', 'AI 이벤트 감지'],
+    metric: 'APEC 정상회의 관제',
     images: [{ src: apec2025Thumbnail, isBlur: true }],
   },
   {
@@ -251,6 +253,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['성능 최적화 90%', 'ElasticSearch', '마이그레이션'],
+    metric: '검색속도 90% 단축',
     images: [{ src: cybercrimeThumbnail, isBlur: true }],
   },
   {
@@ -299,6 +302,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['커스텀 결재라인', '풀스택 개발', '폐쇄망 배포'],
+    metric: '인천공항 보안 포탈',
     images: [
       { src: incheonThumbnail, isBlur: true },
       { src: incheonTwo, isBlur: true },
@@ -342,6 +346,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['작업 시간 80% 단축', 'PDF 자동 파싱', '무중단 배포'],
+    metric: '작업시간 80% 단축',
     images: [
       { src: sokhamThumbnail, isBlur: false },
       { src: sokhamTwo, isBlur: false },
@@ -392,6 +397,7 @@ export const mainProjects: Project[] = [
       },
     ],
     highlights: ['온라인 교육 시스템', '실서비스 운영', 'B2G 사업'],
+    metric: 'B2G · 3년 운영',
     liveUrl: 'https://apc-hub.org/',
     images: [
       { src: apchubThumbnail, isBlur: false },
@@ -434,6 +440,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['백오피스', '앱 배포 관리'],
+    metric: '코드량 40% 감소',
     images: [{ src: locationThumbnail, isBlur: false }],
   },
   {
@@ -666,6 +673,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['Mobile App', '오프라인 지원'],
+    metric: '수기 작업 디지털화',
     images: [{ src: batangThumbnail, isBlur: true }],
   },
   {
@@ -710,6 +718,7 @@ export const etcProjects: Project[] = [
       },
     ],
     highlights: ['디자인 리뉴얼', '챗봇시스템'],
+    metric: 'WebSocket 챗봇 개발',
     images: [{ src: sosThumbnail, isBlur: true }],
   },
 ];
