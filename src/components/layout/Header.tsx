@@ -16,12 +16,34 @@ const navItems = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    const sectionIds = navItems.map((item) => item.href.slice(1));
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollY = window.scrollY;
+
+      setIsScrolled(scrollY > 50);
+
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollHeight > 0 ? (scrollY / scrollHeight) * 100 : 0);
+
+      // 뷰포트 상단 35% 지점을 기준으로 현재 섹션 판별
+      const threshold = window.innerHeight * 0.35;
+      let current = '';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= threshold) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,6 +56,13 @@ export function Header() {
           : 'bg-transparent',
       )}
     >
+      {/* Scroll Progress Bar */}
+      <div
+        className='absolute bottom-0 left-0 h-0.5 bg-accent'
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden='true'
+      />
+
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='flex items-center justify-between h-16'>
           <a href='#' className='text-xl font-bold text-foreground'>
@@ -42,15 +71,29 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className='hidden md:flex items-center gap-8'>
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className='text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.slice(1);
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'text-sm font-medium transition-colors relative pb-1',
+                    isActive
+                      ? 'text-foreground'
+                      : 'text-muted-foreground hover:text-foreground',
+                  )}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span
+                      className='absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full'
+                      aria-hidden='true'
+                    />
+                  )}
+                </a>
+              );
+            })}
             <ThemeToggle />
           </nav>
 
@@ -85,7 +128,12 @@ export function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className='text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
+                  className={cn(
+                    'text-sm font-medium transition-colors',
+                    activeSection === item.href.slice(1)
+                      ? 'text-foreground'
+                      : 'text-muted-foreground hover:text-foreground',
+                  )}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
