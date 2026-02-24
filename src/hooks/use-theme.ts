@@ -4,24 +4,18 @@ type Theme = 'light' | 'dark' | 'system';
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme') as Theme;
-      if (saved && ['light', 'dark', 'system'].includes(saved)) {
-        return saved;
-      }
-      return 'system';
+    const saved = localStorage.getItem('theme') as Theme;
+    if (saved && ['light', 'dark', 'system'].includes(saved)) {
+      return saved;
     }
     return 'system';
   });
 
   // 시스템 테마 감지 함수
   const getSystemTheme = (): 'light' | 'dark' => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-    return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
   };
 
   // 실제 적용할 테마 계산
@@ -63,7 +57,6 @@ export function useTheme() {
       }
     };
 
-    // 이벤트 리스너 등록
     mediaQuery.addEventListener('change', handleChange);
 
     return () => {

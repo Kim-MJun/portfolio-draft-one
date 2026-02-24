@@ -20,7 +20,7 @@ interface ContactFormModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-interface FormData {
+interface ContactFormValues {
   name: string;
   email: string;
   subject: string;
@@ -37,9 +37,9 @@ export function ContactFormModal({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>();
+  } = useForm<ContactFormValues>();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
 
     try {

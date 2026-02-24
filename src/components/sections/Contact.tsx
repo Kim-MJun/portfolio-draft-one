@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Mail, Phone, Github, MapPin } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { personalInfo } from '@/data/resume'
-import { ContactFormModal } from '@/components/ContactFormModal'
+import { useState } from 'react';
+import { Mail, Phone, Github, MapPin } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { personalInfo } from '@/data/resume';
+import { ContactFormModal } from '@/components/ContactFormModal';
 
 const contactItems = [
   {
@@ -30,55 +30,69 @@ const contactItems = [
     value: 'Seoul, South Korea',
     href: null,
   },
-]
+];
 
 export function Contact() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Contact</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            새로운 기회나 협업에 대해 이야기 나누고 싶으시다면 언제든 연락 주세요.
+    <section id='contact' className='py-20'>
+      <div className='max-w-6xl mx-auto px-4 sm:px-6'>
+        <div className='text-center mb-12' data-aos='fade-up'>
+          <h2 className='text-3xl font-bold text-foreground mb-4'>Contact</h2>
+          <p className='text-muted-foreground max-w-2xl mx-auto'>
+            새로운 기회나 협업에 대해 이야기 나누고 싶으시다면 언제든 연락
+            주세요.
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto" data-aos="zoom-in">
-          <Card className="bg-background">
-            <CardContent className="p-8">
-              <div className="grid sm:grid-cols-2 gap-6">
+        <div className='max-w-2xl mx-auto' data-aos='zoom-in'>
+          <Card className='bg-background'>
+            <CardContent className='p-8'>
+              <div className='grid sm:grid-cols-2 gap-6'>
                 {contactItems.map((item) => (
-                  <div key={item.label} className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0" aria-hidden="true">
-                      <item.icon className="h-5 w-5 text-primary" />
+                  <div key={item.label} className='flex items-center gap-4'>
+                    <div
+                      className='w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0'
+                      aria-hidden='true'
+                    >
+                      <item.icon className='h-5 w-5 text-primary' />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
+                      <p className='text-sm text-muted-foreground'>
+                        {item.label}
+                      </p>
                       {item.href ? (
                         <a
                           href={item.href}
-                          target={item.href.startsWith('http') ? '_blank' : undefined}
-                          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="font-medium text-foreground hover:text-primary transition-colors"
+                          target={
+                            item.href.startsWith('http') ? '_blank' : undefined
+                          }
+                          rel={
+                            item.href.startsWith('http')
+                              ? 'noopener noreferrer'
+                              : undefined
+                          }
+                          className='font-medium text-foreground hover:text-primary transition-colors'
                         >
                           {item.value}
                         </a>
                       ) : (
-                        <p className="font-medium text-foreground">{item.value}</p>
+                        <p className='font-medium text-foreground'>
+                          {item.value}
+                        </p>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 pt-8 border-t border-border text-center">
-                <p className="text-muted-foreground mb-4">
+              <div className='mt-8 pt-8 border-t border-border text-center'>
+                <p className='text-muted-foreground mb-4'>
                   이력서나 포트폴리오에 대해 더 자세한 내용이 궁금하시다면
                 </p>
-                <Button size="lg" onClick={() => setIsModalOpen(true)}>
-                  <Mail className="h-4 w-4 mr-2" />
+                <Button size='lg' onClick={() => setIsModalOpen(true)}>
+                  <Mail className='h-4 w-4 mr-2' />
                   이메일 보내기
                 </Button>
               </div>
@@ -89,5 +103,5 @@ export function Contact() {
 
       <ContactFormModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </section>
-  )
+  );
 }

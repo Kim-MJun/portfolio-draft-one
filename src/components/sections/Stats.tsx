@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { mainProjects, etcProjects } from '@/data/resume';
-
-const totalProjects = mainProjects.length + etcProjects.length;
+import { totalProjects } from '@/data/resume';
 
 const stats = [
   { value: 4, suffix: '년+', label: '개발 경력' },

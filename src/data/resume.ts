@@ -723,6 +723,8 @@ export const etcProjects: Project[] = [
   },
 ];
 
+export const totalProjects = mainProjects.length + etcProjects.length;
+
 export const education = {
   university: '가천대학교',
   major: '컴퓨터공학과',
