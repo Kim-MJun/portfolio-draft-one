@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
 
+const getSystemTheme = (): 'light' | 'dark' =>
+  window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+const getAppliedTheme = (theme: Theme): 'light' | 'dark' =>
+  theme === 'system' ? getSystemTheme() : theme;
+
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('theme') as Theme;
@@ -11,25 +17,10 @@ export function useTheme() {
     return 'system';
   });
 
-  // 시스템 테마 감지 함수
-  const getSystemTheme = (): 'light' | 'dark' => {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  };
-
-  // 실제 적용할 테마 계산
-  const getAppliedTheme = (): 'light' | 'dark' => {
-    if (theme === 'system') {
-      return getSystemTheme();
-    }
-    return theme;
-  };
-
   // 테마 적용
   useEffect(() => {
     const root = document.documentElement;
-    const appliedTheme = getAppliedTheme();
+    const appliedTheme = getAppliedTheme(theme);
 
     if (appliedTheme === 'dark') {
       root.classList.add('dark');
@@ -72,5 +63,5 @@ export function useTheme() {
     });
   };
 
-  return { theme, setTheme, toggleTheme, appliedTheme: getAppliedTheme() };
+  return { theme, setTheme, toggleTheme, appliedTheme: getAppliedTheme(theme) };
 }

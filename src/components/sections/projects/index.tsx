@@ -147,6 +147,7 @@ export function Projects() {
       {/* Modal */}
       {selectedProject && (
         <ProjectModal
+          key={selectedProject.id}
           project={selectedProject}
           onClose={() => setSelectedProject(null)}
         />

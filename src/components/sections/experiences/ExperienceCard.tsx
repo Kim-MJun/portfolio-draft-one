@@ -1,5 +1,6 @@
 import { Building2, Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import { type Experience } from '@/data/resume';
 
 interface ExperienceCardProps {
@@ -11,7 +12,10 @@ interface ExperienceCardProps {
 export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) {
   return (
     <div
-      className={`relative flex flex-col md:flex-row gap-8 ${isReversed ? 'md:flex-row-reverse' : ''}`}
+      className={cn(
+        'relative flex flex-col md:flex-row gap-8',
+        isReversed && 'md:flex-row-reverse',
+      )}
       data-aos={isReversed ? 'fade-left' : 'fade-right'}
       data-aos-delay={index * 100}
     >
@@ -22,9 +26,21 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
       />
 
       {/* Content */}
-      <div className={`md:w-1/2 pl-8 md:pl-0 ${isReversed ? 'md:pl-8' : 'md:pr-8 md:text-right'}`}>
-        <div className={`bg-background border border-border rounded-xl p-6 ${isReversed ? '' : 'md:ml-auto'}`}>
-          <div className={`flex items-center gap-2 mb-2 ${isReversed ? '' : 'md:justify-end'}`}>
+      <div
+        className={cn(
+          'md:w-1/2 pl-8 md:pl-0',
+          isReversed ? 'md:pl-8' : 'md:pr-8 md:text-right',
+        )}
+      >
+        <div
+          className={cn(
+            'bg-background border border-border rounded-xl p-6',
+            !isReversed && 'md:ml-auto',
+          )}
+        >
+          <div
+            className={cn('flex items-center gap-2 mb-2', !isReversed && 'md:justify-end')}
+          >
             <Building2 className='h-4 w-4 text-accent' />
             <span className='font-semibold text-foreground'>{exp.company}</span>
             <Badge variant='secondary' className='text-xs'>
@@ -32,7 +48,12 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
             </Badge>
           </div>
 
-          <div className={`flex items-center gap-2 text-sm text-muted-foreground mb-3 ${isReversed ? '' : 'md:justify-end'}`}>
+          <div
+            className={cn(
+              'flex items-center gap-2 text-sm text-muted-foreground mb-3',
+              !isReversed && 'md:justify-end',
+            )}
+          >
             <Calendar className='h-4 w-4' />
             <span>{exp.period}</span>
           </div>
@@ -40,7 +61,7 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
           <p className='text-sm font-medium text-foreground mb-2'>{exp.position}</p>
           <p className='text-sm text-muted-foreground mb-4'>{exp.description}</p>
 
-          <div className={`flex flex-wrap gap-2 ${isReversed ? '' : 'md:justify-end'}`}>
+          <div className={cn('flex flex-wrap gap-2', !isReversed && 'md:justify-end')}>
             {exp.projects.map((project) => (
               <Badge key={project} variant='outline' className='text-xs'>
                 {project}

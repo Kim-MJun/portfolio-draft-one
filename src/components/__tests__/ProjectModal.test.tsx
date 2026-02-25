@@ -242,7 +242,8 @@ describe('ProjectModal', () => {
   // ========================================
   describe('프로젝트 변경 시 인덱스 초기화', () => {
     it('다른 프로젝트로 변경되면 슬라이드 인덱스가 0으로 초기화된다', async () => {
-      const { rerender } = renderModal(projectWithMultipleImages);
+      // key 방식: 부모가 key를 바꾸면 unmount → remount되어 state 초기화
+      const { unmount } = renderModal(projectWithMultipleImages);
       const user = userEvent.setup();
 
       // 인덱스를 1로 변경
@@ -251,8 +252,9 @@ describe('ProjectModal', () => {
         screen.getByAltText('테스트 프로젝트 이미지 1').parentElement,
       ).toHaveStyle({ transform: 'translateX(-100%)' });
 
-      // 이미지 1장인 다른 프로젝트로 교체
-      rerender(<ProjectModal project={projectWithOneImage} onClose={mockOnClose} />);
+      // key 변경으로 인한 unmount → 새 프로젝트로 remount (실제 동작과 동일)
+      unmount();
+      render(<ProjectModal project={projectWithOneImage} onClose={mockOnClose} />);
 
       // 인덱스 0으로 초기화 — 첫 번째 슬라이드가 translateX(0%)
       expect(
