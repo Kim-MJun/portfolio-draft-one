@@ -70,7 +70,9 @@ export const personalInfo = {
     'Slack',
     'Notion',
   ],
-  introduction: `소통과 협업을 바탕으로, 보안 관제부터 업무 자동화까지 다양한 도메인에서 React/Next.js로 비즈니스 가치를 만들어온 개발자입니다.`,
+  introduction: `React/Next.js 기반 프론트엔드 개발자로, 서비스 프로덕트의 UI/UX 구현부터 프론트엔드 아키텍처 설계,
+성능 최적화까지 프로덕트 품질 향상에 집중해왔습니다.`,
+  aboutDescription: `재사용 가능한 공통 모듈과 라이브러리 설계, 레거시 시스템 마이그레이션 및 리팩토링을 통해 코드 품질을 개선해온 경험이 있으며, 기획 단계부터 주도적으로 참여하여 비즈니스 가치를 만들어내는 것을 중요하게 생각합니다.`,
 };
 
 export const skills = {

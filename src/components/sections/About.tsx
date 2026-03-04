@@ -61,9 +61,8 @@ export function About() {
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>About Me</h2>
-          <p className='text-muted-foreground max-w-2xl mx-auto'>
-            {personalInfo.keywords.join(', ')}을 갖춘
-            {personalInfo.title}입니다.
+          <p className='text-muted-foreground max-w-2xl mx-auto leading-relaxed'>
+            {personalInfo.aboutDescription}
           </p>
         </div>
 
