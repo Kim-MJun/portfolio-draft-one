@@ -1,9 +1,10 @@
 import { Code2, Rocket, Users, Briefcase } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { personalInfo, totalProjects } from '@/data/resume';
+import { cn } from '@/lib/utils';
 
 const TechBadge = ({ children }: { children: React.ReactNode }) => (
-  <span className='inline-block px-2 py-0.5 rounded-md bg-accent/10 text-accent-text text-xs font-medium mx-0.5'>
+  <span className='inline-block px-2 py-0.5 rounded-full bg-tertiary/25 text-foreground text-xs font-semibold border-2 border-foreground/50 shadow-[2px_2px_0px_hsl(var(--shadow-soft))] mx-0.5'>
     {children}
   </span>
 );
@@ -38,8 +39,8 @@ const strengths = [
       <>
         <TechBadge>React</TechBadge>
         <TechBadge>Next.js</TechBadge>
-        <TechBadge>TypeScript</TechBadge> 기반의 대규모 시스템 구축 경험과
-        성능 최적화에 강점을 보유하고 있습니다.
+        <TechBadge>TypeScript</TechBadge> 기반의 대규모 시스템 구축 경험과 성능
+        최적화에 강점을 보유하고 있습니다.
       </>
     ),
   },
@@ -56,8 +57,23 @@ const strengths = [
 ];
 
 export function About() {
+  const accentStyles = [
+    'bg-accent/20 text-accent',
+    'bg-secondary/25 text-secondary-foreground',
+    'bg-tertiary/30 text-tertiary-foreground',
+    'bg-quaternary/30 text-quaternary-foreground',
+  ];
+
   return (
-    <section id='about' className='py-20 bg-muted/30'>
+    <section id='about' className='py-20 relative'>
+      <div
+        className='pointer-events-none absolute left-6 top-10 h-24 w-24 rounded-full bg-secondary/25 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'
+        aria-hidden='true'
+      />
+      <div
+        className='pointer-events-none absolute right-8 bottom-10 h-28 w-28 rounded-[30%_70%_70%_30%/40%_40%_60%_60%] bg-accent/20'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>About Me</h2>
@@ -76,10 +92,13 @@ export function About() {
             >
               <CardContent className='p-6'>
                 <div
-                  className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4'
+                  className={cn(
+                    'w-12 h-12 rounded-xl border-2 border-foreground flex items-center justify-center mb-4 shadow-[4px_4px_0px_hsl(var(--shadow-soft))]',
+                    accentStyles[index % accentStyles.length],
+                  )}
                   aria-hidden='true'
                 >
-                  <strength.icon className='h-6 w-6 text-accent' />
+                  <strength.icon className='h-6 w-6' />
                 </div>
                 <h3 className='text-lg font-semibold text-foreground mb-2'>
                   {strength.title}

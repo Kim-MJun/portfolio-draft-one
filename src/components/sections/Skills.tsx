@@ -29,7 +29,7 @@ interface SkillCategoryProps {
 
 function SkillCategory({ title, skills: skillList }: SkillCategoryProps) {
   return (
-    <div className='bg-background border border-border rounded-xl p-6'>
+    <div className='bg-card border-2 border-foreground rounded-2xl p-6 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'>
       <h3 className='text-lg font-semibold text-foreground mb-4'>{title}</h3>
       <div>
         {skillList.map((skill) => (
@@ -52,7 +52,11 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id='skills' className='py-20'>
+    <section id='skills' className='py-20 relative'>
+      <div
+        className='pointer-events-none absolute left-12 bottom-8 h-20 w-20 rounded-full bg-quaternary/25 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>Skills</h2>
