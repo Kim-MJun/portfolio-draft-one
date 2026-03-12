@@ -46,7 +46,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       {/* Backdrop */}
       <button
         type='button'
-        className='absolute inset-0 bg-black/50 backdrop-blur-sm cursor-pointer'
+        className='absolute inset-0 bg-foreground/40 cursor-pointer'
         onClick={onClose}
         aria-label='모달 배경 닫기'
       />

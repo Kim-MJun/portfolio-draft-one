@@ -27,13 +27,17 @@ export function FullscreenImageModal({
   if (!currentImage) return null;
 
   return (
-    <div
-      className='fixed inset-0 z-60 flex items-center justify-center bg-black/90'
-      onClick={onClose}
-    >
+    <div className='fixed inset-0 z-60 flex items-center justify-center bg-foreground/80 relative'>
       <button
+        type='button'
+        className='absolute inset-0 cursor-pointer'
         onClick={onClose}
-        className='absolute top-4 right-4 p-2 cursor-pointer bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors'
+        aria-label='전체화면 배경 닫기'
+      />
+      <button
+        type='button'
+        onClick={onClose}
+        className='absolute top-4 right-4 z-20 p-2 cursor-pointer bg-background/90 hover:bg-secondary rounded-full text-foreground border-2 border-foreground shadow-[2px_2px_0px_hsl(var(--shadow-soft))] transition-all'
         aria-label='전체화면 닫기'
       >
         <X className='h-6 w-6' />
@@ -42,23 +46,23 @@ export function FullscreenImageModal({
       {hasMultiple && (
         <>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
+            type='button'
+            onClick={() => {
               onPrev();
             }}
             disabled={currentIndex === 0}
-            className='absolute left-4 top-1/2 -translate-y-1/2 p-2 cursor-pointer bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-default rounded-lg text-white transition-colors'
+            className='absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 cursor-pointer bg-background/90 hover:bg-secondary disabled:opacity-40 disabled:cursor-default rounded-full text-foreground border-2 border-foreground shadow-[2px_2px_0px_hsl(var(--shadow-soft))] transition-all'
             aria-label='이전 이미지'
           >
             <ChevronLeft className='h-6 w-6' />
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
+            type='button'
+            onClick={() => {
               onNext();
             }}
             disabled={currentIndex === images.length - 1}
-            className='absolute right-4 top-1/2 -translate-y-1/2 p-2 cursor-pointer bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-default rounded-lg text-white transition-colors'
+            className='absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 cursor-pointer bg-background/90 hover:bg-secondary disabled:opacity-40 disabled:cursor-default rounded-full text-foreground border-2 border-foreground shadow-[2px_2px_0px_hsl(var(--shadow-soft))] transition-all'
             aria-label='다음 이미지'
           >
             <ChevronRight className='h-6 w-6' />
@@ -70,24 +74,26 @@ export function FullscreenImageModal({
         src={currentImage.src}
         alt={`${title} 이미지 ${currentIndex + 1}`}
         className={cn(
-          'max-w-[90vw] max-h-[90vh] object-contain',
+          'max-w-[90vw] max-h-[90vh] object-contain relative z-20',
           currentImage.isBlur && 'blur-xs',
         )}
-        onClick={(e) => e.stopPropagation()}
       />
 
       {hasMultiple && (
-        <div className='absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2'>
-          {images.map((_, i) => (
+        <div className='absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20'>
+          {images.map((image, i) => (
             <button
-              key={i}
+              key={image.src}
+              type='button'
               onClick={(e) => {
                 e.stopPropagation();
                 onIndexChange(i);
               }}
               className={cn(
-                'w-2 h-2 rounded-full transition-all cursor-pointer',
-                i === currentIndex ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/80',
+                'w-2 h-2 rounded-full transition-all cursor-pointer border border-foreground/40',
+                i === currentIndex
+                  ? 'bg-secondary w-4 shadow-[1px_1px_0px_hsl(var(--shadow-soft))]'
+                  : 'bg-background/80 hover:bg-background',
               )}
               aria-label={`이미지 ${i + 1}로 이동`}
             />
