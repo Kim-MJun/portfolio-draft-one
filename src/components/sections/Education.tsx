@@ -5,7 +5,11 @@ import { education, certifications } from '@/data/resume';
 
 export function Education() {
   return (
-    <section id='education' className='py-20 bg-muted/30'>
+    <section id='education' className='py-20 relative'>
+      <div
+        className='pointer-events-none absolute right-6 top-8 h-24 w-24 rounded-full bg-accent/20 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>
@@ -21,8 +25,8 @@ export function Education() {
           <Card className='bg-background' data-aos='fade-right'>
             <CardContent className='p-6'>
               <div className='flex items-center gap-3 mb-6'>
-                <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center'>
-                  <GraduationCap className='h-6 w-6 text-accent' />
+                <div className='w-12 h-12 rounded-xl border-2 border-foreground bg-tertiary/25 flex items-center justify-center shadow-[4px_4px_0px_hsl(var(--shadow-soft))]'>
+                  <GraduationCap className='h-6 w-6 text-foreground' />
                 </div>
                 <div>
                   <h3 className='text-lg font-semibold text-foreground'>
@@ -33,7 +37,7 @@ export function Education() {
               </div>
 
               <div className='space-y-4'>
-                <div className='border-l-2 border-accent pl-4'>
+                <div className='border-l-4 border-tertiary pl-4'>
                   <h4 className='font-semibold text-foreground'>
                     {education.university}
                   </h4>
@@ -59,8 +63,8 @@ export function Education() {
           <Card className='bg-background' data-aos='fade-left'>
             <CardContent className='p-6'>
               <div className='flex items-center gap-3 mb-6'>
-                <div className='w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center'>
-                  <Award className='h-6 w-6 text-accent' />
+                <div className='w-12 h-12 rounded-xl border-2 border-foreground bg-secondary/25 flex items-center justify-center shadow-[4px_4px_0px_hsl(var(--shadow-soft))]'>
+                  <Award className='h-6 w-6 text-foreground' />
                 </div>
                 <div>
                   <h3 className='text-lg font-semibold text-foreground'>
@@ -76,7 +80,7 @@ export function Education() {
                 {certifications.map((cert) => (
                   <div
                     key={cert.name}
-                    className='border-l-2 border-accent pl-4'
+                    className='border-l-4 border-secondary pl-4'
                   >
                     <h4 className='font-semibold text-foreground'>
                       {cert.name}

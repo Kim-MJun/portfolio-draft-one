@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/data/resume';
 import { ContactFormModal } from '@/components/ContactFormModal';
+import { cn } from '@/lib/utils';
 
 const contactItems = [
   {
@@ -34,9 +35,19 @@ const contactItems = [
 
 export function Contact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const iconStyles = [
+    'bg-accent/20 text-accent',
+    'bg-secondary/25 text-secondary-foreground',
+    'bg-tertiary/25 text-tertiary-foreground',
+    'bg-quaternary/25 text-quaternary-foreground',
+  ];
 
   return (
-    <section id='contact' className='py-20'>
+    <section id='contact' className='py-20 relative'>
+      <div
+        className='pointer-events-none absolute left-8 top-10 h-24 w-24 rounded-full bg-tertiary/25 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>Contact</h2>
@@ -50,13 +61,16 @@ export function Contact() {
           <Card className='bg-background'>
             <CardContent className='p-8'>
               <div className='grid sm:grid-cols-2 gap-6'>
-                {contactItems.map((item) => (
+                {contactItems.map((item, index) => (
                   <div key={item.label} className='flex items-center gap-4'>
                     <div
-                      className='w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0'
+                      className={cn(
+                        'w-12 h-12 rounded-xl border-2 border-foreground flex items-center justify-center shrink-0 shadow-[4px_4px_0px_hsl(var(--shadow-soft))]',
+                        iconStyles[index % iconStyles.length],
+                      )}
                       aria-hidden='true'
                     >
-                      <item.icon className='h-5 w-5 text-primary' />
+                      <item.icon className='h-5 w-5' />
                     </div>
                     <div>
                       <p className='text-sm text-muted-foreground'>
