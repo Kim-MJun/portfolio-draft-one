@@ -5,17 +5,37 @@ import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/data/resume';
 import profileImage from '@/assets/profile.jpeg';
 import { Stats } from '@/components/sections/Stats';
+import { cn } from '@/lib/utils';
 
 export function Hero() {
+  const badgeStyles = [
+    'bg-accent/15 text-accent-text border-foreground/50',
+    'bg-secondary/20 text-foreground border-foreground/50',
+    'bg-tertiary/20 text-foreground border-foreground/50',
+    'bg-quaternary/20 text-foreground border-foreground/50',
+  ];
+
   return (
-    <section className='min-h-screen flex items-center justify-center pt-16 relative'>
+    <section className='min-h-screen flex items-center justify-center pt-16 relative overflow-hidden'>
+      <div
+        className='pointer-events-none absolute -left-28 -top-24 h-64 w-64 rounded-full bg-tertiary/70 shadow-[10px_10px_0px_hsl(var(--shadow-hard))]'
+        aria-hidden='true'
+      />
+      <div
+        className='pointer-events-none absolute right-10 top-20 h-32 w-32 rounded-[38%_62%_48%_52%/42%_52%_48%_58%] bg-quaternary/60'
+        aria-hidden='true'
+      />
+      <div
+        className='pointer-events-none absolute right-0 bottom-0 h-80 w-80 opacity-20 bg-[radial-gradient(circle,_hsl(var(--foreground))_1px,_transparent_1px)] [background-size:18px_18px]'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6 py-16 w-full'>
         {/* Main: Left text + Right card */}
         <div className='flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16 mb-12'>
           {/* Left: Text Content */}
           <div className='flex-1 text-center md:text-left'>
             {/* Title */}
-            <h1 className='text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4'>
+            <h1 className='text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4 tracking-tight'>
               안녕하세요,
               <br />
               <TypeAnimation
@@ -47,7 +67,10 @@ export function Hero() {
               {personalInfo.heroSkills.map((skill, index) => (
                 <Badge
                   key={skill}
-                  className='animate-fade-in-up px-4 py-1.5 text-sm bg-accent/15 text-accent-text border border-accent/30 hover:-translate-y-1 hover:bg-accent/25 hover:border-accent/50 transition-all duration-200 cursor-default'
+                  className={cn(
+                    'animate-fade-in-up px-4 py-1.5 text-sm border-2 rounded-full shadow-[2px_2px_0px_hsl(var(--shadow-soft))] hover:-translate-y-1 transition-all duration-200 cursor-default',
+                    badgeStyles[index % badgeStyles.length],
+                  )}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {skill}
@@ -78,11 +101,11 @@ export function Hero() {
 
           {/* Right: Profile Card */}
           <div className='shrink-0'>
-            <div className='bg-background border border-border rounded-2xl shadow-lg p-6 flex flex-col items-center gap-4 w-56 md:w-64'>
+            <div className='bg-card border-2 border-foreground rounded-3xl shadow-[8px_8px_0px_hsl(var(--shadow-hard))] p-6 flex flex-col items-center gap-4 w-56 md:w-64'>
               <img
                 src={profileImage}
                 alt='김민준 프로필'
-                className='w-28 h-28 md:w-32 md:h-32 rounded-full object-cover ring-4 ring-accent/30'
+                className='w-28 h-28 md:w-32 md:h-32 rounded-full object-cover ring-4 ring-accent/40'
               />
 
               <div className='text-center'>

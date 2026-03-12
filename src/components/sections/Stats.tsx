@@ -87,7 +87,7 @@ export function Stats() {
   return (
     <div
       ref={ref}
-      className='border-t border-border/60 pt-8 grid grid-cols-2 md:grid-cols-4 gap-8'
+      className='bg-card border-2 border-foreground rounded-2xl shadow-[6px_6px_0px_hsl(var(--shadow-soft))] px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-8'
     >
       {stats.map((stat, index) => (
         <StatItem
