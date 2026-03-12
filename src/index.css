@@ -4,50 +4,62 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.625rem;
-  --background: 0 0% 100%;
-  --foreground: 0 0% 4%;
+  --radius: 1rem;
+  --background: 48 100% 98%;
+  --foreground: 217 33% 17%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 4%;
+  --card-foreground: 217 33% 17%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 4%;
-  --primary: 0 0% 8%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 8%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  --accent: 217 91% 60%;
+  --popover-foreground: 217 33% 17%;
+  --primary: 258 90% 66%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 329 86% 70%;
+  --secondary-foreground: 217 33% 17%;
+  --tertiary: 43 96% 56%;
+  --tertiary-foreground: 217 33% 17%;
+  --quaternary: 158 64% 52%;
+  --quaternary-foreground: 217 33% 17%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 258 90% 66%;
   --accent-foreground: 0 0% 100%;
-  --accent-text: 217 91% 40%;
+  --accent-text: 258 90% 56%;
   --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 217 91% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 213 27% 84%;
+  --ring: 258 90% 66%;
+  --shadow-hard: 217 33% 17%;
+  --shadow-soft: 214 32% 91%;
 }
 
 .dark {
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 8%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 8%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 0 0% 8%;
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 64%;
-  --accent: 217 91% 60%;
+  --background: 224 35% 10%;
+  --foreground: 210 40% 98%;
+  --card: 224 32% 14%;
+  --card-foreground: 210 40% 98%;
+  --popover: 224 32% 14%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 258 90% 66%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 329 86% 70%;
+  --secondary-foreground: 224 35% 10%;
+  --tertiary: 43 96% 56%;
+  --tertiary-foreground: 224 35% 10%;
+  --quaternary: 158 64% 52%;
+  --quaternary-foreground: 224 35% 10%;
+  --muted: 224 25% 18%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 258 90% 66%;
   --accent-foreground: 0 0% 100%;
-  --accent-text: 217 91% 65%;
-  --destructive: 0 62% 50%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 217 91% 60%;
+  --accent-text: 258 90% 72%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 224 20% 24%;
+  --input: 224 20% 24%;
+  --ring: 258 90% 66%;
+  --shadow-hard: 210 40% 98%;
+  --shadow-soft: 224 20% 24%;
 }
 
 @theme inline {
@@ -65,6 +77,10 @@
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-tertiary: hsl(var(--tertiary));
+  --color-tertiary-foreground: hsl(var(--tertiary-foreground));
+  --color-quaternary: hsl(var(--quaternary));
+  --color-quaternary-foreground: hsl(var(--quaternary-foreground));
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-accent: hsl(var(--accent));
@@ -74,9 +90,14 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-shadow-hard: hsl(var(--shadow-hard));
+  --color-shadow-soft: hsl(var(--shadow-soft));
   --font-sans:
-    'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+    'Plus Jakarta Sans', 'Pretendard', system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading:
+    'Outfit', 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 @layer base {
@@ -90,6 +111,13 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
   }
 
   /* Custom Scrollbar */
