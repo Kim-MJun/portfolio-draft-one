@@ -9,7 +9,11 @@ interface ExperienceCardProps {
   isReversed: boolean;
 }
 
-export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) {
+export function ExperienceCard({
+  exp,
+  index,
+  isReversed,
+}: ExperienceCardProps) {
   return (
     <div
       className={cn(
@@ -21,7 +25,7 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
     >
       {/* Timeline dot */}
       <div
-        className='absolute left-0 md:left-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background md:-translate-x-1/2 -translate-x-1/2'
+        className='absolute left-0 md:left-1/2 w-4 h-4 bg-accent rounded-full border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--shadow-soft))] md:-translate-x-1/2 -translate-x-1/2'
         aria-hidden='true'
       />
 
@@ -34,12 +38,15 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
       >
         <div
           className={cn(
-            'bg-background border border-border rounded-xl p-6',
+            'bg-card border-2 border-foreground rounded-2xl p-6 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]',
             !isReversed && 'md:ml-auto',
           )}
         >
           <div
-            className={cn('flex items-center gap-2 mb-2', !isReversed && 'md:justify-end')}
+            className={cn(
+              'flex items-center gap-2 mb-2',
+              !isReversed && 'md:justify-end',
+            )}
           >
             <Building2 className='h-4 w-4 text-accent' />
             <span className='font-semibold text-foreground'>{exp.company}</span>
@@ -58,10 +65,19 @@ export function ExperienceCard({ exp, index, isReversed }: ExperienceCardProps) 
             <span>{exp.period}</span>
           </div>
 
-          <p className='text-sm font-medium text-foreground mb-2'>{exp.position}</p>
-          <p className='text-sm text-muted-foreground mb-4'>{exp.description}</p>
+          <p className='text-sm font-medium text-foreground mb-2'>
+            {exp.position}
+          </p>
+          <p className='text-sm text-muted-foreground mb-4'>
+            {exp.description}
+          </p>
 
-          <div className={cn('flex flex-wrap gap-2', !isReversed && 'md:justify-end')}>
+          <div
+            className={cn(
+              'flex flex-wrap gap-2',
+              !isReversed && 'md:justify-end',
+            )}
+          >
             {exp.projects.map((project) => (
               <Badge key={project} variant='outline' className='text-xs'>
                 {project}
