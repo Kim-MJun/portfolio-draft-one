@@ -29,7 +29,15 @@ export function Projects() {
   };
 
   return (
-    <section id='projects' className='py-20'>
+    <section id='projects' className='py-20 relative'>
+      <div
+        className='pointer-events-none absolute left-6 top-12 h-24 w-24 rounded-full bg-quaternary/25 shadow-[6px_6px_0px_hsl(var(--shadow-soft))]'
+        aria-hidden='true'
+      />
+      <div
+        className='pointer-events-none absolute right-8 top-24 h-20 w-20 rounded-[40%_60%_50%_50%/50%_40%_60%_50%] bg-tertiary/30'
+        aria-hidden='true'
+      />
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='text-center mb-12' data-aos='fade-up'>
           <h2 className='text-3xl font-bold text-foreground mb-4'>Projects</h2>
@@ -39,74 +47,90 @@ export function Projects() {
         </div>
 
         {/* 필터 영역 */}
-        <div className='mb-8 space-y-4' data-aos='fade-up' data-aos-delay='100'>
-          {/* 회사별 필터 */}
-          <div>
-            <div className='flex items-center gap-2 mb-3'>
-              <Filter className='h-4 w-4 text-muted-foreground' />
-              <h3 className='text-sm font-semibold text-foreground'>회사</h3>
-            </div>
-            <div className='flex flex-wrap gap-2' role='group' aria-label='회사별 필터'>
-              {companies.map((company) => (
-                <Badge
-                  key={company}
-                  variant={selectedCompany === company ? 'default' : 'outline'}
-                  className='cursor-pointer hover:bg-primary/10 transition-colors'
-                  onClick={() => setSelectedCompany(company)}
-                  role='button'
-                  tabIndex={0}
-                  aria-pressed={selectedCompany === company}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedCompany(company)}
-                >
-                  {company}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          {/* 기술 스택 필터 */}
-          <div>
-            <div className='flex items-center gap-2 mb-3'>
-              <Filter className='h-4 w-4 text-muted-foreground' />
-              <h3 className='text-sm font-semibold text-foreground'>기술 스택</h3>
-            </div>
-            <div className='flex flex-wrap gap-2' role='group' aria-label='기술 스택 필터'>
-              {techStacks.map((tech) => (
-                <Badge
-                  key={tech}
-                  variant={selectedTech === tech ? 'default' : 'outline'}
-                  className='cursor-pointer hover:bg-primary/10 transition-colors'
-                  onClick={() => setSelectedTech(tech)}
-                  role='button'
-                  tabIndex={0}
-                  aria-pressed={selectedTech === tech}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedTech(tech)}
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          {/* 필터 초기화 & 결과 카운트 */}
-          <div className='flex items-center justify-between pt-2'>
-            <p className='text-sm text-muted-foreground'>
-              총{' '}
-              <span className='font-semibold text-foreground'>
-                {filteredProjects.length}
-              </span>
-              개의 프로젝트
-            </p>
-            {(selectedCompany !== '전체' || selectedTech !== '전체') && (
-              <Button
-                variant='ghost'
-                size='sm'
-                onClick={resetFilters}
-                className='text-xs'
+        <div className='mb-10' data-aos='fade-up' data-aos-delay='100'>
+          <div className='bg-card border-2 border-foreground rounded-2xl shadow-[6px_6px_0px_hsl(var(--shadow-soft))] p-4 space-y-4'>
+            {/* 회사별 필터 */}
+            <div>
+              <div className='flex items-center gap-2 mb-3'>
+                <Filter className='h-4 w-4 text-muted-foreground' />
+                <h3 className='text-sm font-semibold text-foreground'>회사</h3>
+              </div>
+              <fieldset
+                className='flex flex-wrap gap-2'
+                aria-label='회사별 필터'
               >
-                필터 초기화
-              </Button>
-            )}
+                {companies.map((company) => (
+                  <Badge
+                    key={company}
+                    variant={
+                      selectedCompany === company ? 'default' : 'outline'
+                    }
+                    className='cursor-pointer hover:bg-primary/10 transition-colors'
+                    onClick={() => setSelectedCompany(company)}
+                    role='button'
+                    tabIndex={0}
+                    aria-pressed={selectedCompany === company}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' && setSelectedCompany(company)
+                    }
+                  >
+                    {company}
+                  </Badge>
+                ))}
+              </fieldset>
+            </div>
+
+            {/* 기술 스택 필터 */}
+            <div>
+              <div className='flex items-center gap-2 mb-3'>
+                <Filter className='h-4 w-4 text-muted-foreground' />
+                <h3 className='text-sm font-semibold text-foreground'>
+                  기술 스택
+                </h3>
+              </div>
+              <fieldset
+                className='flex flex-wrap gap-2'
+                aria-label='기술 스택 필터'
+              >
+                {techStacks.map((tech) => (
+                  <Badge
+                    key={tech}
+                    variant={selectedTech === tech ? 'default' : 'outline'}
+                    className='cursor-pointer hover:bg-primary/10 transition-colors'
+                    onClick={() => setSelectedTech(tech)}
+                    role='button'
+                    tabIndex={0}
+                    aria-pressed={selectedTech === tech}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' && setSelectedTech(tech)
+                    }
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </fieldset>
+            </div>
+
+            {/* 필터 초기화 & 결과 카운트 */}
+            <div className='flex items-center justify-between pt-2'>
+              <p className='text-sm text-muted-foreground'>
+                총{' '}
+                <span className='font-semibold text-foreground'>
+                  {filteredProjects.length}
+                </span>
+                개의 프로젝트
+              </p>
+              {(selectedCompany !== '전체' || selectedTech !== '전체') && (
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  onClick={resetFilters}
+                  className='text-xs'
+                >
+                  필터 초기화
+                </Button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -125,7 +149,9 @@ export function Projects() {
         {/* ETC Projects */}
         <div className='mt-20'>
           <div className='text-center mb-12' data-aos='fade-up'>
-            <h3 className='text-2xl font-bold text-foreground mb-4'>ETC Projects</h3>
+            <h3 className='text-2xl font-bold text-foreground mb-4'>
+              ETC Projects
+            </h3>
             <p className='text-muted-foreground max-w-2xl mx-auto'>
               그 외 참여한 프로젝트들입니다.
             </p>

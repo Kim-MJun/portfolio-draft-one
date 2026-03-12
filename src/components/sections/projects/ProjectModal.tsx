@@ -28,7 +28,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       }
       if (isImageFullscreen && images.length > 1) {
         if (e.key === 'ArrowLeft') setCurrentIndex((i) => Math.max(0, i - 1));
-        if (e.key === 'ArrowRight') setCurrentIndex((i) => Math.min(images.length - 1, i + 1));
+        if (e.key === 'ArrowRight')
+          setCurrentIndex((i) => Math.min(images.length - 1, i + 1));
       }
     };
 
@@ -37,19 +38,32 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   }, [isImageFullscreen, onClose, images.length]);
 
   const goPrev = () => setCurrentIndex((i) => Math.max(0, i - 1));
-  const goNext = () => setCurrentIndex((i) => Math.min(images.length - 1, i + 1));
+  const goNext = () =>
+    setCurrentIndex((i) => Math.min(images.length - 1, i + 1));
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
       {/* Backdrop */}
-      <div className='absolute inset-0 bg-black/50 backdrop-blur-sm' onClick={onClose} />
+      <button
+        type='button'
+        className='absolute inset-0 bg-black/50 backdrop-blur-sm cursor-pointer'
+        onClick={onClose}
+        aria-label='모달 배경 닫기'
+      />
 
       {/* Modal */}
-      <div className='relative bg-background border border-border rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden'>
+      <div className='relative bg-background border-2 border-foreground rounded-3xl shadow-[8px_8px_0px_hsl(var(--shadow-hard))] max-w-2xl w-full max-h-[90vh] overflow-hidden'>
         <div className='max-h-[90vh] overflow-y-auto'>
-          <div className='sticky top-0 bg-background border-b border-border px-6 py-4 flex items-center justify-between z-10'>
-            <h2 className='text-xl font-bold text-foreground'>{project.title}</h2>
-            <Button variant='ghost' size='icon' onClick={onClose} aria-label='모달 닫기'>
+          <div className='sticky top-0 bg-background border-b-2 border-foreground px-6 py-4 flex items-center justify-between z-10'>
+            <h2 className='text-xl font-bold text-foreground'>
+              {project.title}
+            </h2>
+            <Button
+              variant='ghost'
+              size='icon'
+              onClick={onClose}
+              aria-label='모달 닫기'
+            >
               <X className='h-5 w-5' />
             </Button>
           </div>
@@ -86,8 +100,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* Description */}
             <div>
-              <h3 className='font-semibold text-foreground mb-2'>프로젝트 설명</h3>
-              <p className='text-sm text-muted-foreground leading-relaxed'>{project.description}</p>
+              <h3 className='font-semibold text-foreground mb-2'>
+                프로젝트 설명
+              </h3>
+              <p className='text-sm text-muted-foreground leading-relaxed'>
+                {project.description}
+              </p>
             </div>
 
             {/* Tech Stack */}
@@ -105,13 +123,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Achievements */}
             <div>
               <div className='space-y-4'>
-                {project.achievements.map((group, groupIndex) => (
-                  <div key={groupIndex}>
-                    <h3 className='font-bold text-accent mb-2'>{group.category}</h3>
+                {project.achievements.map((group) => (
+                  <div key={group.category}>
+                    <h3 className='font-bold text-accent mb-2'>
+                      {group.category}
+                    </h3>
                     <ul className='space-y-1.5'>
-                      {group.items.map((item, index) => (
+                      {group.items.map((item) => (
                         <li
-                          key={index}
+                          key={`${group.category}-${item}`}
                           className='flex items-start gap-2 text-sm text-muted-foreground'
                         >
                           <CheckCircle2 className='h-4 w-4 text-primary mt-0.5 shrink-0' />
@@ -128,7 +148,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {project.liveUrl && (
               <div className='pt-4 border-t border-border'>
                 <Button asChild>
-                  <a href={project.liveUrl} target='_blank' rel='noopener noreferrer'>
+                  <a
+                    href={project.liveUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
                     <ExternalLink className='h-4 w-4 mr-2' />
                     서비스 바로가기
                   </a>

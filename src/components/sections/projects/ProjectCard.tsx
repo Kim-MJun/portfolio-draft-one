@@ -40,8 +40,11 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
         )}
         <div className='absolute inset-0 bg-gradient-to-t from-background/80 to-transparent' />
         {project.metric && (
-          <div className='absolute top-3 left-3 flex items-center gap-1.5 bg-black/50 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm'>
-            <TrendingUp className='h-3 w-3 text-accent shrink-0' aria-hidden='true' />
+          <div className='absolute top-3 left-3 flex items-center gap-1.5 bg-foreground text-background text-xs font-semibold px-3 py-1.5 rounded-full border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--shadow-hard))]'>
+            <TrendingUp
+              className='h-3 w-3 text-tertiary shrink-0'
+              aria-hidden='true'
+            />
             <span>{project.metric}</span>
           </div>
         )}
@@ -88,7 +91,9 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
         </div>
 
         <div className='mt-4 pt-4 border-t border-border'>
-          <span className='text-xs text-muted-foreground'>{project.period}</span>
+          <span className='text-xs text-muted-foreground'>
+            {project.period}
+          </span>
         </div>
       </CardContent>
     </Card>
