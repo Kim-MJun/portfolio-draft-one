@@ -86,7 +86,7 @@ export function About() {
           {strengths.map((strength, index) => (
             <Card
               key={strength.title}
-              className='bg-background hover:shadow-lg transition-shadow'
+              className='bg-background hover:-translate-y-1 hover:shadow-[10px_10px_0px_hsl(var(--shadow-soft))] transition-all'
               data-aos='fade-up'
               data-aos-delay={index * 100}
             >
