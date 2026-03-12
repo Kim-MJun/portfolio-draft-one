@@ -52,7 +52,7 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-border'
+          ? 'bg-card/95 border-b-2 border-foreground shadow-[4px_4px_0px_hsl(var(--shadow-soft))]'
           : 'bg-transparent',
       )}
     >
@@ -65,7 +65,7 @@ export function Header() {
 
       <div className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='flex items-center justify-between h-16'>
-          <a href='#' className='text-xl font-bold text-foreground'>
+          <a href='#top' className='text-xl font-bold text-foreground'>
             MJ<span className='text-accent'>.</span>
           </a>
 

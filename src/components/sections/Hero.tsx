@@ -16,7 +16,10 @@ export function Hero() {
   ];
 
   return (
-    <section className='min-h-screen flex items-center justify-center pt-16 relative overflow-hidden'>
+    <section
+      id='top'
+      className='min-h-screen flex items-center justify-center pt-16 relative overflow-hidden'
+    >
       <div
         className='pointer-events-none absolute -left-28 -top-24 h-64 w-64 rounded-full bg-tertiary/70 shadow-[10px_10px_0px_hsl(var(--shadow-hard))]'
         aria-hidden='true'
