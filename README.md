@@ -1,6 +1,6 @@
 # Portfolio - 김민준
 
-5년차 웹 프론트엔드 개발자 포트폴리오 사이트
+4년차 웹 프론트엔드 개발자 포트폴리오 사이트
 
 ## Tech Stack
 
@@ -29,6 +29,12 @@ pnpm build
 
 # 빌드 결과 미리보기
 pnpm preview
+
+# 테스트 실행
+pnpm test
+
+# 린트 검사
+pnpm lint
 ```
 
 ## Project Structure
@@ -43,6 +49,10 @@ src/
 ├── lib/             # 유틸리티
 └── data/            # 이력서 데이터
 ```
+
+## Deploy
+
+[https://portfolio-draft-one.vercel.app](https://portfolio-draft-one.vercel.app)
 
 ## License
 
