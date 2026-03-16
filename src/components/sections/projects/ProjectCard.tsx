@@ -28,6 +28,8 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
           <img
             src={project.images[0].src}
             alt={project.title}
+            loading='lazy'
+            decoding='async'
             className={cn(
               'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
               project.images[0].isBlur && 'blur-xs',

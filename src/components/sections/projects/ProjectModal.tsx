@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Calendar, ExternalLink, X, Users, CheckCircle2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { type Project } from '@/data/resume';
 import { ImageSlider } from './ImageSlider';
 import { FullscreenImageModal } from './FullscreenImageModal';
@@ -42,138 +50,156 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     setCurrentIndex((i) => Math.min(images.length - 1, i + 1));
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
-      {/* Backdrop */}
-      <button
-        type='button'
-        className='absolute inset-0 bg-foreground/40 cursor-pointer'
-        onClick={onClose}
-        aria-label='모달 배경 닫기'
-      />
+    <>
+      <Dialog
+        open
+        onOpenChange={(open) => {
+          if (!open) onClose();
+        }}
+      >
+        <DialogContent
+          showCloseButton={false}
+          className='sm:max-w-2xl max-h-[90vh] overflow-hidden p-0 gap-0'
+          onEscapeKeyDown={(event) => {
+            event.preventDefault();
+          }}
+          onPointerDownOutside={(e) => {
+            if (isImageFullscreen) e.preventDefault();
+          }}
+          onInteractOutside={(e) => {
+            if (isImageFullscreen) e.preventDefault();
+          }}
+        >
+          <DialogHeader className='sr-only'>
+            <DialogTitle>{project.title}</DialogTitle>
+            <DialogDescription>{project.description}</DialogDescription>
+          </DialogHeader>
 
-      {/* Modal */}
-      <div className='relative bg-background border-2 border-foreground rounded-3xl shadow-[8px_8px_0px_hsl(var(--shadow-hard))] max-w-2xl w-full max-h-[90vh] overflow-hidden'>
-        <div className='max-h-[90vh] overflow-y-auto'>
-          <div className='sticky top-0 bg-background border-b-2 border-foreground px-6 py-4 flex items-center justify-between z-10'>
-            <h2 className='text-xl font-bold text-foreground'>
-              {project.title}
-            </h2>
-            <Button
-              variant='ghost'
-              size='icon'
-              onClick={onClose}
-              aria-label='모달 닫기'
-            >
-              <X className='h-5 w-5' />
-            </Button>
+          <div className='max-h-[90vh] overflow-y-auto'>
+            <div className='sticky top-0 bg-background border-b-2 border-foreground px-6 py-4 flex items-center justify-between z-10'>
+              <h2 className='text-xl font-bold text-foreground'>
+                {project.title}
+              </h2>
+              <Button
+                variant='ghost'
+                size='icon'
+                onClick={onClose}
+                aria-label='모달 닫기'
+              >
+                <X className='h-5 w-5' />
+              </Button>
+            </div>
+
+            <ImageSlider
+              images={images}
+              title={project.title}
+              currentIndex={currentIndex}
+              onPrev={goPrev}
+              onNext={goNext}
+              onIndexChange={setCurrentIndex}
+              onOpenFullscreen={() => setIsImageFullscreen(true)}
+            />
+
+            <div className='p-6 space-y-6'>
+              {/* Meta info */}
+              <div className='flex flex-wrap items-center gap-4 text-sm text-muted-foreground'>
+                <div className='flex items-center gap-1'>
+                  <Calendar className='h-4 w-4' />
+                  {project.period}
+                </div>
+                <div className='flex items-center gap-1'>
+                  <Users className='h-4 w-4' />
+                  {project.role}
+                </div>
+              </div>
+
+              {/* Highlights */}
+              <div className='flex flex-wrap gap-2'>
+                {project.highlights.map((highlight) => (
+                  <Badge key={highlight}>{highlight}</Badge>
+                ))}
+              </div>
+
+              {/* Description */}
+              <div>
+                <h3 className='font-semibold text-foreground mb-2'>
+                  프로젝트 설명
+                </h3>
+                <p className='text-sm text-muted-foreground leading-relaxed'>
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Tech Stack */}
+              <div>
+                <h3 className='font-semibold text-foreground mb-2'>
+                  기술 스택
+                </h3>
+                <div className='flex flex-wrap gap-2'>
+                  {project.techStack.map((tech) => (
+                    <Badge key={tech} variant='secondary'>
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div>
+                <div className='space-y-4'>
+                  {project.achievements.map((group) => (
+                    <div key={group.category}>
+                      <h3 className='font-bold text-accent mb-2'>
+                        {group.category}
+                      </h3>
+                      <ul className='space-y-1.5'>
+                        {group.items.map((item) => (
+                          <li
+                            key={`${group.category}-${item}`}
+                            className='flex items-start gap-2 text-sm text-muted-foreground'
+                          >
+                            <CheckCircle2 className='h-4 w-4 text-primary mt-0.5 shrink-0' />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live URL */}
+              {project.liveUrl && (
+                <div className='pt-4 border-t border-border'>
+                  <Button asChild>
+                    <a
+                      href={project.liveUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      <ExternalLink className='h-4 w-4 mr-2' />
+                      서비스 바로가기
+                    </a>
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
-
-          <ImageSlider
+        </DialogContent>
+      </Dialog>
+      {isImageFullscreen &&
+        createPortal(
+          <FullscreenImageModal
             images={images}
             title={project.title}
             currentIndex={currentIndex}
+            onClose={() => setIsImageFullscreen(false)}
             onPrev={goPrev}
             onNext={goNext}
             onIndexChange={setCurrentIndex}
-            onOpenFullscreen={() => setIsImageFullscreen(true)}
-          />
-
-          <div className='p-6 space-y-6'>
-            {/* Meta info */}
-            <div className='flex flex-wrap items-center gap-4 text-sm text-muted-foreground'>
-              <div className='flex items-center gap-1'>
-                <Calendar className='h-4 w-4' />
-                {project.period}
-              </div>
-              <div className='flex items-center gap-1'>
-                <Users className='h-4 w-4' />
-                {project.role}
-              </div>
-            </div>
-
-            {/* Highlights */}
-            <div className='flex flex-wrap gap-2'>
-              {project.highlights.map((highlight) => (
-                <Badge key={highlight}>{highlight}</Badge>
-              ))}
-            </div>
-
-            {/* Description */}
-            <div>
-              <h3 className='font-semibold text-foreground mb-2'>
-                프로젝트 설명
-              </h3>
-              <p className='text-sm text-muted-foreground leading-relaxed'>
-                {project.description}
-              </p>
-            </div>
-
-            {/* Tech Stack */}
-            <div>
-              <h3 className='font-semibold text-foreground mb-2'>기술 스택</h3>
-              <div className='flex flex-wrap gap-2'>
-                {project.techStack.map((tech) => (
-                  <Badge key={tech} variant='secondary'>
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-            {/* Achievements */}
-            <div>
-              <div className='space-y-4'>
-                {project.achievements.map((group) => (
-                  <div key={group.category}>
-                    <h3 className='font-bold text-accent mb-2'>
-                      {group.category}
-                    </h3>
-                    <ul className='space-y-1.5'>
-                      {group.items.map((item) => (
-                        <li
-                          key={`${group.category}-${item}`}
-                          className='flex items-start gap-2 text-sm text-muted-foreground'
-                        >
-                          <CheckCircle2 className='h-4 w-4 text-primary mt-0.5 shrink-0' />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Live URL */}
-            {project.liveUrl && (
-              <div className='pt-4 border-t border-border'>
-                <Button asChild>
-                  <a
-                    href={project.liveUrl}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    <ExternalLink className='h-4 w-4 mr-2' />
-                    서비스 바로가기
-                  </a>
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {isImageFullscreen && (
-        <FullscreenImageModal
-          images={images}
-          title={project.title}
-          currentIndex={currentIndex}
-          onClose={() => setIsImageFullscreen(false)}
-          onPrev={goPrev}
-          onNext={goNext}
-          onIndexChange={setCurrentIndex}
-        />
-      )}
-    </div>
+          />,
+          document.body,
+        )}
+    </>
   );
 }

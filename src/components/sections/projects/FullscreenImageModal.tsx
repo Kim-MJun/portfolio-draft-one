@@ -27,7 +27,7 @@ export function FullscreenImageModal({
   if (!currentImage) return null;
 
   return (
-    <div className='fixed inset-0 z-60 flex items-center justify-center bg-foreground/80 relative'>
+    <div className='fixed inset-0 z-60 flex items-center justify-center bg-foreground/80 pointer-events-auto'>
       <button
         type='button'
         className='absolute inset-0 cursor-pointer'

@@ -39,6 +39,8 @@ export function ImageSlider({
               <img
                 src={image.src}
                 alt={`${title} 이미지 ${i + 1}`}
+                loading='lazy'
+                decoding='async'
                 className={cn(
                   'w-full h-full object-cover',
                   image.isBlur && 'blur-xs',
@@ -50,7 +52,7 @@ export function ImageSlider({
           <button
             type='button'
             onClick={onOpenFullscreen}
-            className='absolute top-3 right-3 p-2 cursor-pointer bg-background/90 hover:bg-secondary rounded-full text-foreground border-2 border-foreground shadow-[2px_2px_0px_hsl(var(--shadow-soft))] opacity-0 group-hover/thumbnail:opacity-100 transition-all z-10'
+            className='absolute top-3 right-3 p-2 cursor-pointer bg-background/90 hover:bg-secondary rounded-full text-foreground border-2 border-foreground shadow-[2px_2px_0px_hsl(var(--shadow-soft))] opacity-100 md:opacity-0 md:group-hover/thumbnail:opacity-100 transition-all z-10'
             aria-label='이미지 전체화면 보기'
           >
             <Maximize2 className='h-5 w-5' />

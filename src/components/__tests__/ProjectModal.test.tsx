@@ -219,9 +219,8 @@ describe('ProjectModal', () => {
 
     it('전체화면 닫기 버튼 클릭 시 전체화면이 닫힌다', async () => {
       renderModal(projectWithOneImage);
-      const user = userEvent.setup();
       fireEvent.click(screen.getByRole('button', { name: '이미지 전체화면 보기' }));
-      await user.click(screen.getByRole('button', { name: '전체화면 닫기' }));
+      fireEvent.click(screen.getByRole('button', { name: '전체화면 닫기' }));
       expect(screen.queryByRole('button', { name: '전체화면 닫기' })).not.toBeInTheDocument();
     });
 
