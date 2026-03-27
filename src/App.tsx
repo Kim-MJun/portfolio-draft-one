@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Toaster } from '@/components/ui/sonner';
@@ -11,8 +12,9 @@ import { Experience } from '@/components/sections/experiences';
 import { Projects } from '@/components/sections/projects';
 import { Education } from '@/components/sections/Education';
 import { Contact } from '@/components/sections/Contact';
+import { NotFound } from '@/pages/NotFound';
 
-function App() {
+const HomePage = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -35,8 +37,19 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      <Toaster />
     </div>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+      <Toaster />
+    </BrowserRouter>
   );
 }
 
