@@ -52,7 +52,7 @@ src/
 
 ## Deploy
 
-[https://portfolio-draft-one.vercel.app](https://portfolio-draft-one.vercel.app)
+[https://mjkim-portfolio.vercel.app](https://mjkim-portfolio.vercel.app)
 
 ## License
 
