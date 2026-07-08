@@ -54,6 +54,8 @@ src/
 
 [https://mjkim-portfolio.vercel.app](https://mjkim-portfolio.vercel.app)
 
+Vercel과 GitHub가 연동되어 있어 `main` 브랜치에 푸시하면 자동 배포됩니다.
+
 ## License
 
 MIT
