@@ -28,6 +28,16 @@ export function Projects() {
     setSelectedTech('전체');
   };
 
+  const handleFilterKeyDown = (
+    e: React.KeyboardEvent<HTMLSpanElement>,
+    action: () => void,
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   return (
     <section id='projects' className='py-20 relative'>
       <div
@@ -71,7 +81,7 @@ export function Projects() {
                     tabIndex={0}
                     aria-pressed={selectedCompany === company}
                     onKeyDown={(e) =>
-                      e.key === 'Enter' && setSelectedCompany(company)
+                      handleFilterKeyDown(e, () => setSelectedCompany(company))
                     }
                   >
                     {company}
@@ -102,7 +112,7 @@ export function Projects() {
                     tabIndex={0}
                     aria-pressed={selectedTech === tech}
                     onKeyDown={(e) =>
-                      e.key === 'Enter' && setSelectedTech(tech)
+                      handleFilterKeyDown(e, () => setSelectedTech(tech))
                     }
                   >
                     {tech}
@@ -135,16 +145,22 @@ export function Projects() {
         </div>
 
         {/* Main Projects 그리드 */}
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              onClick={setSelectedProject}
-            />
-          ))}
-        </div>
+        {filteredProjects.length > 0 ? (
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onClick={setSelectedProject}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className='text-center text-muted-foreground py-12'>
+            조건에 맞는 프로젝트가 없습니다.
+          </p>
+        )}
 
         {/* ETC Projects */}
         <div className='mt-20'>

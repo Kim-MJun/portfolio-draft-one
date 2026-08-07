@@ -32,3 +32,10 @@ dist-ssr
 /resume_v1.pdf
 /resume_v2.pdf
 /resume_latest.pdf
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
